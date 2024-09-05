@@ -12,6 +12,8 @@ import Interviews from '../pages/Interviews';
 import NotFound from '../pages/NotFound';
 import Profile from '../pages/Profile';
 import Users from '../pages/Users';
+import EditUser from '../pages/Users/EditUser';
+import NewUser from '../pages/Users/NewUser';
 import Vacancies from '../pages/Vacancies';
 
 export function AppRoute() {
@@ -28,7 +30,11 @@ export function AppRoute() {
         <Route path="/candidates" element={<Candidates />} />
         <Route path="/applications" element={<Applications />} />
         <Route path="/interviews" element={<Interviews />} />
+
         <Route path="/users" element={<Users />} />
+        <Route path="/users/new" element={<NewUser />} />
+        <Route path="/users/:id" element={<EditUser />} />
+
         <Route path="/companies" element={<Companies />} />
         <Route path="/profile" element={<Profile />} />
         {/* <Route path="/forgot" element={<ForgotPage />} /> */}

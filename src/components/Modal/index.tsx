@@ -1,7 +1,7 @@
+import { ReactNode } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { ModalStyles } from './styles';
-import { ReactNode } from 'react';
 
 interface MyModalInterface {
   title: string;

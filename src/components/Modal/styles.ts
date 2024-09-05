@@ -16,7 +16,6 @@ export const ModalStyles = styled.div<StyledModalInterface>`
           color: ${({ theme }) => theme.colors.gray[900]} !important;
           background: ${({ theme }) => theme.colors.background} !important;
           padding: 24px;
-          padding-bottom: 0px;
           max-height: 500px;
           min-height: ${({ minHeight }) => minHeight || 'unset'};
           overflow: ${({ overflow }) => overflow || 'auto'};

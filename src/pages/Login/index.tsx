@@ -10,6 +10,7 @@ import { ButtonContainer } from '../../components/Form';
 import FormGroup from '../../components/FormGroup';
 import Input from '../../components/Input';
 import Loader from '../../components/Loader';
+import PasswordInputFormGroup from '../../components/PasswordInputFormGroup';
 import useLogin from './useLogin';
 
 export default function Login() {
@@ -60,17 +61,12 @@ export default function Login() {
             </div>
 
             <div className="passwordInput">
-              <FormGroup error={getErrorMessageByFieldName('password')}>
-                <label htmlFor="senha">Senha</label>
-                <Input
-                  placeholder="********"
-                  value={password}
-                  onChange={handlePasswordChange}
-                  type="password"
-                  autoComplete="new-password"
-                  error={getErrorMessageByFieldName('password')}
-                />
-              </FormGroup>
+              <PasswordInputFormGroup
+                label='Senha'
+                onChange={handlePasswordChange}
+                value={password}
+                error={getErrorMessageByFieldName('password')}
+              />
             </div>
           </div>
 

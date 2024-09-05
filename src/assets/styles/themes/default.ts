@@ -64,7 +64,7 @@ export default {
   },
 
   filters: {
-    primary: 'invert(24%) sepia(58%) saturate(3480%) hue-rotate(183deg) brightness(96%) contrast(101%)',
+    primary: 'invert(31%) sepia(83%) saturate(4249%) hue-rotate(343deg) brightness(95%) contrast(78%)',
     oppositeTheme: 'invert(0%) sepia(7%) saturate(7500%) hue-rotate(331deg) brightness(105%) contrast(105%)',
     sameAsTheme: 'invert(100%) sepia(0%) saturate(25%) hue-rotate(50deg) brightness(105%) contrast(106%)',
   },

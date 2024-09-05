@@ -5,7 +5,8 @@ export const Container = styled.header`
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  gap: 16px;
+  gap: 4px;
+  margin-bottom: 16px;
 `;
 
 export const Title = styled.div`

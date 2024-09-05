@@ -68,7 +68,7 @@ export function AuthProvider({ children }: AuthProviderInterface) {
               setSigned(true);
               setUserLocalStorage(response.user);
               setUser(response.user);
-              toast.success('Login efetuado. Bem-vindo ao sistema gerencial de seu estabelecimento!');
+              toast.success('Login efetuado. Bem-vindo ao seu sistema gerencial de vagas!');
               navigate('/?active=Home');
               return;
             }

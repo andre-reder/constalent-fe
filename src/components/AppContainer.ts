@@ -8,7 +8,7 @@ export const AppContainer = styled.div`
 `;
 
 export const RoutesContainer = styled.div`
-  padding: 36px;
+  padding: 32px;
   width: 100%;
 `;
 
