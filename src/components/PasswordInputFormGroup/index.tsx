@@ -12,10 +12,11 @@ export interface FormGroupInterface {
   isLoading?: boolean;
   aside?: boolean;
   padding?: number;
+  disabled?: boolean;
 }
 
 export default function PasswordInputFormGroup({
-  label, error, aside, padding, value, onChange,
+  label, error, aside, padding, value, onChange, disabled,
 }: FormGroupInterface) {
   const [isVisible, setIsVisible] = useState(false);
 
@@ -31,6 +32,7 @@ export default function PasswordInputFormGroup({
           onChange={onChange}
           type={isVisible ? 'text' : 'password'}
           autoComplete="new-password"
+          disabled={disabled}
         />
 
         <div className="password">

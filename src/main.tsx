@@ -12,7 +12,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
       <AuthProvider>
         <Routes />
       </AuthProvider>
-      <ToastContainer position='bottom-center'/>
+      <ToastContainer position='bottom-center' theme='dark'/>
     </BrowserRouter>
   </React.StrictMode>,
 );

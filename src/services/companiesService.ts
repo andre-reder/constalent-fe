@@ -42,6 +42,29 @@ class CompaniesService {
     });
   }
 
+  createCompany = async ({
+    token,
+    reqBody,
+  }: ICompaniesService) => {
+    return this.httpClient.post({
+      path: `/companies`,
+      token,
+      reqBody,
+    });
+  }
+
+  updateCompany = async ({
+    token,
+    reqBody,
+    id,
+  }: ICompaniesService) => {
+    return this.httpClient.post({
+      path: `/companies/${id}`,
+      token,
+      reqBody,
+    });
+  }
+
   deleteCompany = async ({
     token,
     id,

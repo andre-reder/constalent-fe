@@ -9,6 +9,7 @@ export const AppContainer = styled.div`
 
 export const RoutesContainer = styled.div`
   padding: 32px;
+  padding-left: 140px;
   width: 100%;
 `;
 
@@ -39,6 +40,7 @@ export const ThemeRadioButtonsContainer = styled.div`
   position: absolute;
   top: 0;
   right: 0;
+  z-index: 1000;
 
   @media(max-width: 500px) {
     display: flex;

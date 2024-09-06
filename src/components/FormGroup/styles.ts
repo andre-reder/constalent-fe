@@ -1,10 +1,18 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
+interface FormGroupProps {
+  isAside?: boolean;
+  marginTop?: number;
+}
+
+export const Container = styled.div<FormGroupProps>`
 width: 100%;
+margin-top: ${({ marginTop }) => marginTop ? `${marginTop}px` : '0px'};
+
   & + & {
-    margin-top: 16px;
+    margin-top: ${({ isAside }) => (isAside ? '0' : '16px')};
   }
+
 
   small {
     color: ${({ theme }) => theme.colors.danger.main};

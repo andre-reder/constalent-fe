@@ -7,10 +7,11 @@ import {
 import Applications from '../pages/Applications';
 import Candidates from '../pages/Candidates';
 import Companies from '../pages/Companies';
+import EditCompany from '../pages/Companies/EditCompany';
+import NewCompany from '../pages/Companies/NewCompany';
 import Home from '../pages/Home';
 import Interviews from '../pages/Interviews';
 import NotFound from '../pages/NotFound';
-import Profile from '../pages/Profile';
 import Users from '../pages/Users';
 import EditUser from '../pages/Users/EditUser';
 import NewUser from '../pages/Users/NewUser';
@@ -36,7 +37,8 @@ export function AppRoute() {
         <Route path="/users/:id" element={<EditUser />} />
 
         <Route path="/companies" element={<Companies />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/companies/new" element={<NewCompany />} />
+        <Route path="/companies/:id" element={<EditCompany />} />
         {/* <Route path="/forgot" element={<ForgotPage />} /> */}
 
         <Route path="/" element={<NotFound />} />

@@ -24,22 +24,22 @@ export function Routes() {
     ? (
       <ThemeProvider theme={theme}>
         <GlobalStyles />
-        <ThemeRadioButtonsContainer>
-          <ThemeRadioButton
-              onClick={() => setTheme(defaultTheme)}
-              selected={theme.colors.background != '#121212'}
-            >
-              <img src={sun} alt="lightTheme" />
-          </ThemeRadioButton>
-          <ThemeRadioButton
-              onClick={() => setTheme(darkTheme)}
-              selected={theme.colors.background == '#121212'}
-            >
-              <img src={moon} alt="darkTheme" />
-          </ThemeRadioButton>
-        </ThemeRadioButtonsContainer>
         <AppContainer>
           <Sidebar active={activeNavItem} />
+            <ThemeRadioButtonsContainer>
+              <ThemeRadioButton
+                  onClick={() => setTheme(defaultTheme)}
+                  selected={theme.colors.background != '#121212'}
+                >
+                  <img src={sun} alt="lightTheme" />
+              </ThemeRadioButton>
+              <ThemeRadioButton
+                  onClick={() => setTheme(darkTheme)}
+                  selected={theme.colors.background == '#121212'}
+                >
+                  <img src={moon} alt="darkTheme" />
+              </ThemeRadioButton>
+            </ThemeRadioButtonsContainer>
           <RoutesContainer>
             <AppRoute />
           </RoutesContainer>

@@ -49,9 +49,4 @@ export const NoDataContainer = styled.div<NoDataContainerInterface>`
       width: 24px;
     }
   }
-
-  img {
-    filter: ${({ theme }) => ((theme.colors.background === '#F6F5FC')
-    && 'invert(25%) sepia(56%) saturate(3343%) hue-rotate(182deg) brightness(97%) contrast(101%);')};
-  }
 `;

@@ -14,6 +14,7 @@ export const Container = styled.div`
   gap: 8px;
   width: 108px;
   height: 100vh;
+  position: fixed;
   box-shadow: 10px 0px 32px rgba(204, 204, 204, 0.1);
 `;
 
@@ -29,7 +30,7 @@ export const LogoText = styled.div`
 `;
 
 export const NavItemsContainer = styled.div`
-  max-height: 55vh;
+  max-height: 70vh;
   overflow: auto;
   box-sizing: border-box;
   width: 100%;

@@ -45,8 +45,8 @@ export default function ListHeader({
           </>
         )}
         <div className="actionButtons">
-          <Link to='/users/new?active=Users'>
-            Novo Usuário
+          <Link to='/companies/new?active=Companies'>
+            Nova Empresa
           </Link>
         </div>
       </Header>

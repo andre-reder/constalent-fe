@@ -50,7 +50,8 @@ export function AuthProvider({ children }: AuthProviderInterface) {
     setTokenLocalStorage('');
     setToken('');
     toast.error('Sessão Expirada. Realize o login novamente');
-  }, [navigate, setSignedLocalStorage, setTokenLocalStorage]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [setSignedLocalStorage, setTokenLocalStorage]);
 
   const login = useCallback(
     async (email: string, password: string) => {
@@ -84,7 +85,8 @@ export function AuthProvider({ children }: AuthProviderInterface) {
         console.log(error);
       }
     },
-    [apiCall, setTokenLocalStorage, setSignedLocalStorage, setUserLocalStorage, navigate],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [apiCall, setTokenLocalStorage, setSignedLocalStorage, setUserLocalStorage],
   );
 
   const appData = useMemo(() => ({

@@ -6,7 +6,6 @@ import company from '../../assets/images/icons/company.svg';
 import home from '../../assets/images/icons/home.svg';
 import logo from '../../assets/images/icons/logo.svg';
 import off from '../../assets/images/icons/off.svg';
-import profile from '../../assets/images/icons/profile.svg';
 import userCircle from '../../assets/images/icons/userCircle.svg';
 import users from '../../assets/images/icons/users.svg';
 import { useAppContext } from '../../contexts/auth';
@@ -98,16 +97,6 @@ export function Sidebar({ active }: SidebarProps) {
       </NavItemsContainer>
 
       <EndingElements>
-        <Link to='/profile?active=Profile'>
-          <NavItem active={active === 'Profile'}>
-            <img src={profile} alt="" />
-            <span>Perfil</span>
-            {active === 'Profile' && (
-              <strong>__</strong>
-            )}
-          </NavItem>
-        </Link>
-
         <NavItem active={false} onClick={() => signOut()}>
           <img src={off} alt="" />
           <span>Sair</span>
