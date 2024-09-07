@@ -2,7 +2,7 @@
 import { ChangeEvent, Dispatch, SetStateAction } from 'react';
 import Select from 'react-select';
 import { CustomStyle } from '../../../../../components/CustomSelectStyle';
-import { CustomStyle as CustomStyleDarkTheme } from '../../../../../components/CustomSelectStyleDarkTheme';
+import { CustomStyleDarkTheme } from '../../../../../components/CustomSelectStyleDarkTheme';
 import FilterRadioButton from '../../../../../components/FilterRadioButtons';
 import { FilterRadioButtonsContainer } from '../../../../../components/FilterRadioButtonsContainer';
 import { AsideContainer, Container as StyledContainer } from '../../../../../components/Form';

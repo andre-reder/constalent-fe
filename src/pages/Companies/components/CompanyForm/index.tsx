@@ -145,7 +145,7 @@ export default function CompanyForm({ isEdit = false }: ICompanyForm) {
               disabled={!isFormValid}
               onClick={() => addCompany()}
             >
-              {`Adicionar Usuário`}
+              {`Adicionar Empresa`}
             </Button>
           )}
 

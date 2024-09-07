@@ -41,7 +41,7 @@ margin-top: ${({ marginTop }) => marginTop ? `${marginTop}px` : '0px'};
 
   .loader {
     position: absolute;
-    top: 12px;
+    top: 38px;
     right: 16px;
   }
 `;
