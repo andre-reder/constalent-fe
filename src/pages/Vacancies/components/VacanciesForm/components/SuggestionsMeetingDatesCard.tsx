@@ -1,5 +1,5 @@
 import { ChangeEvent } from 'react';
-import { Container as StyledContainer } from '../../../../../components/Form';
+import { AsideContainer, Container as StyledContainer } from '../../../../../components/Form';
 import FormGroup from '../../../../../components/FormGroup';
 import Input from '../../../../../components/Input';
 import { GetErrorMessageByFieldNameType } from '../../../../../hooks/useErrors';
@@ -22,11 +22,12 @@ export default function SuggestionsMeetingDatesCard({
       <div className="card-title">
         Sugestões de datas e horas para reunião de alinhamento da vaga
       </div>
-        <FormGroup error={getErrorMessageByFieldName('suggestionDate1')} marginTop={16}>
+      <AsideContainer>
+        <FormGroup error={getErrorMessageByFieldName('suggestionDate1')} aside>
           <label htmlFor="login">Data e hora 1 *</label>
           <Input
             type='datetime-local'
-            value={suggestionsOfAlignmentMeetingDates[0]}
+            value={suggestionsOfAlignmentMeetingDates[0] || ''}
             onChange={(e) => handleSuggestionsOfAlignmentMeetingDatesChange(e, 0)}
             autoComplete="new-password"
             error={getErrorMessageByFieldName('suggestionDate1')}
@@ -34,11 +35,11 @@ export default function SuggestionsMeetingDatesCard({
           />
         </FormGroup>
 
-        <FormGroup error={getErrorMessageByFieldName('suggestionDate2')} marginTop={16}>
+        <FormGroup error={getErrorMessageByFieldName('suggestionDate2')} aside>
           <label htmlFor="login">Data e hora 2 *</label>
           <Input
             type='datetime-local'
-            value={suggestionsOfAlignmentMeetingDates[1]}
+            value={suggestionsOfAlignmentMeetingDates[1] || ''}
             onChange={(e) => handleSuggestionsOfAlignmentMeetingDatesChange(e, 1)}
             autoComplete="new-password"
             error={getErrorMessageByFieldName('suggestionDate2')}
@@ -46,17 +47,18 @@ export default function SuggestionsMeetingDatesCard({
           />
         </FormGroup>
 
-        <FormGroup error={getErrorMessageByFieldName('suggestionDate3')} marginTop={16}>
+        <FormGroup error={getErrorMessageByFieldName('suggestionDate3')} aside>
           <label htmlFor="login">Data e hora 3 *</label>
           <Input
             type='datetime-local'
-            value={suggestionsOfAlignmentMeetingDates[2]}
+            value={suggestionsOfAlignmentMeetingDates[2] || ''}
             onChange={(e) => handleSuggestionsOfAlignmentMeetingDatesChange(e, 2)}
             autoComplete="new-password"
             error={getErrorMessageByFieldName('suggestionDate3')}
             disabled={isEdit}
           />
         </FormGroup>
+      </AsideContainer>
     </StyledContainer>
   );
 }

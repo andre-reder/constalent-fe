@@ -1,9 +1,7 @@
-import PropTypes from 'prop-types';
-
-import { Overlay } from './styles';
-import Spinner from '../Spinner';
-import ReactPortal from '../ReactPortal';
 import useAnimatedUnmount from '../../hooks/useAnimatedUnmount';
+import ReactPortal from '../ReactPortal';
+import Spinner from '../Spinner';
+import { Overlay } from './styles';
 
 interface LoaderInterface {
   isLoading: boolean;
@@ -24,7 +22,3 @@ export default function Loader({ isLoading }: LoaderInterface) {
     </ReactPortal>
   );
 }
-
-Loader.propTypes = {
-  isLoading: PropTypes.bool.isRequired,
-};

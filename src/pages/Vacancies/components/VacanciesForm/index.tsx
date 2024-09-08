@@ -3,6 +3,7 @@ import Button from '../../../../components/Button';
 import { ButtonContainer } from "../../../../components/Form";
 import Loader from "../../../../components/Loader";
 import ReturnHeader from "../../../../components/ReturnHeader";
+import { useAppContext } from "../../../../contexts/auth";
 import GeneralDataCard from "./components/GeneralDataCard";
 import RecruiterFillCard from "./components/RecruiterFillCard";
 import RequirementsCard from "./components/RequirementsCard";
@@ -55,7 +56,6 @@ export default function VacanciesForm({ isEdit = false }: IVacanciesForm) {
     necessaryRequirements,
     desirableRequirements,
     willApplicantBeTested,
-    recruiterComission,
     alignmentMeetingDate,
     suggestionsOfAlignmentMeetingDates,
     isReposition,
@@ -99,7 +99,6 @@ export default function VacanciesForm({ isEdit = false }: IVacanciesForm) {
     handleDesirableRequirementsChange,
     handleWillApplicantBeTestedChange,
     handleSuggestionsOfAlignmentMeetingDatesChange,
-    handleRecruiterComissionChange,
     handleAlignmentMeetingDateChange,
     handleIsRepositionChange,
     handleStatusChange,
@@ -108,12 +107,15 @@ export default function VacanciesForm({ isEdit = false }: IVacanciesForm) {
     companyOptions,
   } = useVacancyForm({ isEdit });
 
+  const { user } = useAppContext();
+  const isCustomer = user?.role === 'customer';
+
   return (
     <>
       <Loader isLoading={isLoading} />
       <ReturnHeader
-        title={isEdit ? `Editar Candidato ${vacancyBeingEditted.name}` : `Adicionar Candidato`}
-        link="/candidates?active=Candidates"
+        title={isEdit ? `Editar Vaga ${vacancyBeingEditted.title}` : `Adicionar Vaga`}
+        link="/vacancies?active=Vacancies"
       />
 
       <Container>
@@ -172,7 +174,9 @@ export default function VacanciesForm({ isEdit = false }: IVacanciesForm) {
               handleOtherBenefitsChange={handleOtherBenefitsChange}
               handleHasVariableComissions={handleHasVariableComissions}
             />
+          </Col>
 
+          <Col>
             <ResponsibleCard
               responsibleName={responsibleName}
               handleResponsibleNameChange={handleResponsibleNameChange}
@@ -228,26 +232,27 @@ export default function VacanciesForm({ isEdit = false }: IVacanciesForm) {
             />
           </Col>
         </Row>
-        <Row xs={1} md={1} lg={1}>
-          <Col>
-            <RecruiterFillCard
-              getErrorMessageByFieldName={getErrorMessageByFieldName}
-              isEdit={isEdit}
-              recruiterComission={recruiterComission}
-              handleRecruiterComissionChange={handleRecruiterComissionChange}
-              alignmentMeetingDate={alignmentMeetingDate}
-              handleAlignmentMeetingDateChange={handleAlignmentMeetingDateChange}
-              isReposition={isReposition}
-              handleIsRepositionChange={handleIsRepositionChange}
-              status={status}
-              handleStatusChange={handleStatusChange}
-              company={company}
-              handleCompanyChange={handleCompanyChange}
-              statusOptions={statusOptions}
-              companyOptions={companyOptions}
-            />
-          </Col>
-        </Row>
+
+        {!isCustomer && (
+          <Row xs={1} md={1} lg={1}>
+            <Col>
+              <RecruiterFillCard
+                getErrorMessageByFieldName={getErrorMessageByFieldName}
+                isEdit={isEdit}
+                alignmentMeetingDate={alignmentMeetingDate}
+                handleAlignmentMeetingDateChange={handleAlignmentMeetingDateChange}
+                isReposition={isReposition}
+                handleIsRepositionChange={handleIsRepositionChange}
+                status={status}
+                handleStatusChange={handleStatusChange}
+                company={company}
+                handleCompanyChange={handleCompanyChange}
+                statusOptions={statusOptions}
+                companyOptions={companyOptions}
+              />
+            </Col>
+          </Row>
+        )}
 
         <ButtonContainer>
           {!isEdit && (

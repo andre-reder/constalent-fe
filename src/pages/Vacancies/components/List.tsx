@@ -43,16 +43,34 @@ export default function List({
                     {' '}
                     De {floatToCurrency(vacancy.minSalary)} à {floatToCurrency(vacancy.maxSalary)}
                   </span>
+
                   <span>
                     Vagas:
                     {' '}
                     {vacancy.vacanciesAmount || 'Não informado'}
                   </span>
+
                   <span>
                     Aberta em:
                     {' '}
-                    {format(vacancy.createdAt, 'dd/MM/yyyy') || 'Não informado'}
+                    {format(new Date(vacancy.createdAt), 'dd/MM/yyyy') || 'Não informado'}
                   </span>
+
+                  {vacancy.canceledAt && vacancy.status === 'canceled' && (
+                    <span>
+                      Cancelada em:
+                      {' '}
+                      {format(new Date(vacancy.canceledAt), 'dd/MM/yyyy') || 'Não informado'}
+                    </span>
+                  )}
+
+                  {vacancy.finishedAt && vacancy.status === 'finished' && (
+                    <span>
+                      Finalizada em:
+                      {' '}
+                      {format(new Date(vacancy.finishedAt), 'dd/MM/yyyy') || 'Não informado'}
+                    </span>
+                  )}
                 </div>
                 <div className="actions">
                   <Link to={`/vacancies/${vacancy.id}?active=Vacancies`}>

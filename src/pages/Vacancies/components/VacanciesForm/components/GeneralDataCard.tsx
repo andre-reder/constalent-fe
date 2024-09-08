@@ -36,9 +36,9 @@ interface IGeneralDataCard {
   handleReasonForOpeningChange: (e: ChangeEvent<HTMLTextAreaElement>) => void;
   isSecret: boolean;
   handleIsSecret: (e: boolean) => void;
-  vacanciesAmount: number;
+  vacanciesAmount: number | string;
   handleVacanciesAmountChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  subordinatesAmount?: number | '';
+  subordinatesAmount?: number | string;
   handleSubordinatesAmountChange: (e: ChangeEvent<HTMLInputElement>) => void;
   workingSchedule: string;
   handleWorkingScheduleChange: (e: ChangeEvent<HTMLTextAreaElement>) => void;
@@ -107,7 +107,6 @@ export default function GeneralDataCard({
             onChange={handleDepartmentChange}
             autoComplete="new-password"
             error={getErrorMessageByFieldName('department')}
-            disabled={isEdit}
           />
         </FormGroup>
 
@@ -188,7 +187,6 @@ export default function GeneralDataCard({
             onChange={handleVacanciesAmountChange}
             autoComplete="new-password"
             error={getErrorMessageByFieldName('vacanciesAmount')}
-            disabled={isEdit}
           />
         </FormGroup>
 
@@ -200,12 +198,12 @@ export default function GeneralDataCard({
             onChange={handleSubordinatesAmountChange}
             autoComplete="new-password"
             error={getErrorMessageByFieldName('subordinatesAmount')}
-            disabled={isEdit}
           />
         </FormGroup>
       </AsideContainer>
 
       <FormGroup error={getErrorMessageByFieldName('workingSchedule')} marginTop={16}>
+        <label htmlFor="login">Jornada de trabalho</label>
         <Textarea
           onChange={handleWorkingScheduleChange}
           placeholder="Descreva a jornada de trabalho (ex: 8h às 18h de segunda a sexta)"
@@ -216,6 +214,7 @@ export default function GeneralDataCard({
 
       <AsideContainer>
         <FormGroup error={getErrorMessageByFieldName('description')} aside>
+        <label htmlFor="login">Descrição</label>
           <Textarea
             onChange={handleDescriptionChange}
             placeholder="Informe a descrição da vaga. Quais serão as responsablidades do encarregado, quais os requisitos necessários, etc."
@@ -225,6 +224,7 @@ export default function GeneralDataCard({
         </FormGroup>
 
         <FormGroup error={getErrorMessageByFieldName('additionalInfo')} aside>
+        <label htmlFor="login">Informação Adicional</label>
           <Textarea
             onChange={handleAdditionalInfoChange}
             placeholder="Informe qualquer informação adicional que desejar e julgue necessário para esta vaga."
@@ -234,6 +234,7 @@ export default function GeneralDataCard({
         </FormGroup>
 
         <FormGroup error={getErrorMessageByFieldName('reasonForOpening')} aside>
+        <label htmlFor="login">Motivo de abertura</label>
           <Textarea
             onChange={handleReasonForOpeningChange}
             placeholder="Informe o motivo pelo qual essa vaga está sendo aberta."

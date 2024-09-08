@@ -31,6 +31,7 @@ export default function DeleteVacancyModal({
           </div>
           <br />
           <strong>Isso irá remover todas as aplicações e entrevistas cadastradas para ela</strong>
+          <br /> <br />
           <strong>Atenção, esta ação é irreversível!</strong>
         </>
 )}

@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
 import { ReactNode } from 'react';
 
@@ -26,9 +25,5 @@ function Transitions({ children }: TransitionsInterface) {
     </motion.div>
   );
 }
-
-Transitions.propTypes = {
-  children: PropTypes.node.isRequired,
-};
 
 export default Transitions;

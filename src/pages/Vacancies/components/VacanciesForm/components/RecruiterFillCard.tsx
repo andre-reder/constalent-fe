@@ -12,8 +12,6 @@ import { GetErrorMessageByFieldNameType } from '../../../../../hooks/useErrors';
 import { OptionType } from '../../../types';
 
 interface IRecruiterFillCard {
-  recruiterComission: string;
-  handleRecruiterComissionChange: (e: ChangeEvent<HTMLInputElement>) => void;
   alignmentMeetingDate: string;
   handleAlignmentMeetingDateChange: (e: ChangeEvent<HTMLInputElement>) => void;
   isReposition: boolean;
@@ -31,8 +29,6 @@ interface IRecruiterFillCard {
 export default function RecruiterFillCard({
   getErrorMessageByFieldName,
   isEdit,
-  recruiterComission,
-  handleRecruiterComissionChange,
   alignmentMeetingDate,
   handleAlignmentMeetingDateChange,
   isReposition,
@@ -52,28 +48,15 @@ export default function RecruiterFillCard({
         Dados Complementares
       </div>
       <AsideContainer>
-        <FormGroup error={getErrorMessageByFieldName('recruiterComission')} aside>
-          <label htmlFor="login">Comissão *</label>
-          <Input
-            placeholder="Comissão total da vaga"
-            value={recruiterComission}
-            onChange={handleRecruiterComissionChange}
-            autoComplete="new-password"
-            error={getErrorMessageByFieldName('recruiterComission')}
-            disabled={isEdit}
-          />
-        </FormGroup>
-
         <FormGroup error={getErrorMessageByFieldName('alignmentMeetingDate')} aside>
           <label htmlFor="login">Data da reunião de alinhamento *</label>
           <Input
             placeholder="Tempo de experiência mínimo"
             type='datetime-local'
-            value={alignmentMeetingDate}
+            value={alignmentMeetingDate || ''}
             onChange={handleAlignmentMeetingDateChange}
             autoComplete="new-password"
             error={getErrorMessageByFieldName('alignmentMeetingDate')}
-            disabled={isEdit}
           />
         </FormGroup>
 
@@ -116,6 +99,7 @@ export default function RecruiterFillCard({
             styles={selectedTheme === 'dark' ? CustomStyleDarkTheme : CustomStyle}
             classNamePrefix="react-select"
             className="react-select-container"
+            isDisabled={isEdit}
           />
         </FormGroup>
       </AsideContainer>

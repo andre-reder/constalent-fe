@@ -17,7 +17,6 @@ interface IResponsibleCard {
 
 export default function ResponsibleCard({
   getErrorMessageByFieldName,
-  isEdit,
   responsibleName,
   handleResponsibleNameChange,
   responsiblePhone,
@@ -38,7 +37,6 @@ export default function ResponsibleCard({
             onChange={handleResponsibleNameChange}
             autoComplete="new-password"
             error={getErrorMessageByFieldName('responsibleName')}
-            disabled={isEdit}
           />
         </FormGroup>
 
@@ -50,7 +48,6 @@ export default function ResponsibleCard({
             onChange={handleResponsiblePhoneChange}
             autoComplete="new-password"
             error={getErrorMessageByFieldName('responsiblePhone')}
-            disabled={isEdit}
           />
         </FormGroup>
 
@@ -62,7 +59,6 @@ export default function ResponsibleCard({
             onChange={handleResponsibleEmailChange}
             autoComplete="new-password"
             error={getErrorMessageByFieldName('responsibleEmail')}
-            disabled={isEdit}
           />
         </FormGroup>
     </StyledContainer>

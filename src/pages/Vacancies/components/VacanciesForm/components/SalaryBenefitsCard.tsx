@@ -1,5 +1,6 @@
 import { ChangeEvent } from 'react';
 import Select, { MultiValue } from 'react-select';
+import makeAnimated from 'react-select/animated';
 import { CustomStyle } from '../../../../../components/CustomSelectStyle';
 import { CustomStyleDarkTheme } from '../../../../../components/CustomSelectStyleDarkTheme';
 import FilterRadioButton from '../../../../../components/FilterRadioButtons';
@@ -29,7 +30,6 @@ interface ISalaryBenefitsCard {
 
 export default function SalaryBenefitsCard({
   getErrorMessageByFieldName,
-  isEdit,
   minSalary,
   maxSalary,
   benefits,
@@ -43,6 +43,7 @@ export default function SalaryBenefitsCard({
   handleHasVariableComissions,
 }: ISalaryBenefitsCard) {
   const { selectedTheme } = useThemeContext();
+  const animatedComponents = makeAnimated();
 
   return (
     <StyledContainer>
@@ -58,7 +59,6 @@ export default function SalaryBenefitsCard({
             onChange={handleMinSalaryChange}
             autoComplete="new-password"
             error={getErrorMessageByFieldName('minSalary')}
-            disabled={isEdit}
           />
         </FormGroup>
 
@@ -70,7 +70,6 @@ export default function SalaryBenefitsCard({
             onChange={handleMaxSalaryChange}
             autoComplete="new-password"
             error={getErrorMessageByFieldName('maxSalary')}
-            disabled={isEdit}
           />
         </FormGroup>
       </AsideContainer>
@@ -88,6 +87,8 @@ export default function SalaryBenefitsCard({
             styles={selectedTheme === 'dark' ? CustomStyleDarkTheme : CustomStyle}
             classNamePrefix="react-select"
             className="react-select-container"
+            closeMenuOnSelect={false}
+            components={animatedComponents}
           />
         </FormGroup>
 

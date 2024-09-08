@@ -17,18 +17,18 @@ interface IRequirementsCard {
   handleNeedsTravelChange: (e: boolean) => void;
   needsExtraHours: boolean;
   handleNeedsExtraHoursChange: (e: boolean) => void;
-  minAge: number | '';
+  minAge: number | string;
   handleMinAgeChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  maxAge: number | '';
+  maxAge: number | string;
   handleMaxAgeChange: (e: ChangeEvent<HTMLInputElement>) => void;
   gender: GenderType;
   handleGenderChange: (e: GenderType) => void;
   educationLevel: OptionType;
   educationLevelOptions: OptionType[];
   handleEducationLevelChange: (e: OptionType) => void;
-  minExperience: number | '';
+  minExperience: number | string;
   handleMinExperienceChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  desirableExperience: number | '';
+  desirableExperience: number | string;
   handleDesirableExperienceChange: (e: ChangeEvent<HTMLInputElement>) => void;
   necessaryRequirements: string;
   handleNecessaryRequirementsChange: (e: ChangeEvent<HTMLTextAreaElement>) => void;
@@ -42,7 +42,6 @@ interface IRequirementsCard {
 
 export default function RequirementsCard({
   getErrorMessageByFieldName,
-  isEdit,
   educationLevel,
   educationLevelOptions,
   handleEducationLevelChange,
@@ -97,7 +96,6 @@ export default function RequirementsCard({
             onChange={handleMinExperienceChange}
             autoComplete="new-password"
             error={getErrorMessageByFieldName('minExperience')}
-            disabled={isEdit}
           />
         </FormGroup>
 
@@ -109,7 +107,6 @@ export default function RequirementsCard({
             onChange={handleDesirableExperienceChange}
             autoComplete="new-password"
             error={getErrorMessageByFieldName('desirableExperience')}
-            disabled={isEdit}
           />
         </FormGroup>
       </AsideContainer>

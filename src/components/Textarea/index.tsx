@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { ChangeEvent } from 'react';
 import { StyledTextarea } from './styles';
 
@@ -16,8 +15,8 @@ export default function Textarea({
   value,
   placeholder,
   onChange,
-  darkBorder,
-  height,
+  darkBorder = false,
+  height = 150,
   maxLength = undefined,
 }: TextareaInterface) {
   return (
@@ -31,18 +30,3 @@ export default function Textarea({
     />
   );
 }
-
-Textarea.propTypes = {
-  value: PropTypes.string.isRequired,
-  placeholder: PropTypes.string.isRequired,
-  onChange: PropTypes.string.isRequired,
-  darkBorder: PropTypes.bool,
-  height: PropTypes.number,
-  // error: PropTypes.string,
-};
-
-Textarea.defaultProps = {
-  darkBorder: false,
-  height: 150,
-  // error: '',
-};

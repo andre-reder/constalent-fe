@@ -10,4 +10,5 @@ export interface IAuthUserObject {
   name: string,
   id: string,
   role: string,
+  companyId?: string,
 }

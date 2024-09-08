@@ -1,6 +1,5 @@
-import PropTypes from 'prop-types';
-import { SecondaryButton } from './styles';
 import { ReactNode } from 'react';
+import { SecondaryButton } from './styles';
 
 interface ThemeRadioButtonInterface {
   children: ReactNode;
@@ -20,9 +19,3 @@ export default function ThemeRadioButton({
     </SecondaryButton>
   );
 }
-
-ThemeRadioButton.propTypes = {
-  children: PropTypes.node.isRequired,
-  onClick: PropTypes.func.isRequired,
-  selected: PropTypes.bool.isRequired,
-};

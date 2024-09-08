@@ -18,6 +18,8 @@ import Users from '../pages/Users';
 import EditUser from '../pages/Users/EditUser';
 import NewUser from '../pages/Users/NewUser';
 import Vacancies from '../pages/Vacancies';
+import EditVacancy from '../pages/Vacancies/EditVacancy';
+import NewVacancy from '../pages/Vacancies/NewVacancy';
 
 export function AppRoute() {
   const location = useLocation();
@@ -29,7 +31,10 @@ export function AppRoute() {
         key={location.pathname}
       >
         <Route path="/" element={<Home />} />
+
         <Route path="/vacancies" element={<Vacancies />} />
+        <Route path="/vacancies/new" element={<NewVacancy />} />
+        <Route path="/vacancies/:id" element={<EditVacancy />} />
 
         <Route path="/candidates" element={<Candidates />} />
         <Route path="/candidates/new" element={<NewCandidate />} />
