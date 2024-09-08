@@ -6,12 +6,12 @@ interface FormGroupProps {
 }
 
 export const Container = styled.div<FormGroupProps>`
-width: 100%;
-margin-top: ${({ marginTop }) => marginTop ? `${marginTop}px` : '0px'};
+  width: 100%;
+  margin-top: ${({ marginTop }) => marginTop ? `${marginTop}px` : '0px'};
 
-  & + & {
+  /* & + & {
     margin-top: ${({ isAside }) => (isAside ? '0' : '16px')};
-  }
+  } */
 
 
   small {

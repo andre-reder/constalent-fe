@@ -34,7 +34,7 @@ export default function ProfessionalInfoCard({
       </div>
 
       <AsideContainer>
-        <FormGroup error={getErrorMessageByFieldName('lastCompany')} isAside>
+        <FormGroup error={getErrorMessageByFieldName('lastCompany')} aside>
           <label htmlFor="login">Última Empresa</label>
           <Input
             placeholder="Última Empresa"
@@ -45,7 +45,7 @@ export default function ProfessionalInfoCard({
           />
         </FormGroup>
 
-        <FormGroup error={getErrorMessageByFieldName('lastPosition')} isAside>
+        <FormGroup error={getErrorMessageByFieldName('lastPosition')} aside>
           <label htmlFor="login">Último Cargo</label>
           <Input
             placeholder="Último Cargo"
@@ -58,7 +58,7 @@ export default function ProfessionalInfoCard({
       </AsideContainer>
 
       <AsideContainer>
-        <FormGroup error={getErrorMessageByFieldName('lastSalary')} isAside>
+        <FormGroup error={getErrorMessageByFieldName('lastSalary')} aside>
           <label htmlFor="login">Último Salário</label>
           <Input
             placeholder="Último Salário"
@@ -69,7 +69,7 @@ export default function ProfessionalInfoCard({
           />
         </FormGroup>
 
-        <FormGroup error={getErrorMessageByFieldName('salaryExpected')} isAside>
+        <FormGroup error={getErrorMessageByFieldName('salaryExpected')} aside>
           <label htmlFor="login">Expectativa Salarial</label>
           <Input
             placeholder="Expectativa Salarial"

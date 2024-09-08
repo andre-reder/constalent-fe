@@ -27,6 +27,11 @@ interface IGeneralDataCard {
   childrenAmount: number | string;
   handleChildrenAmountChange: (e: ChangeEvent<HTMLInputElement>) => void;
   maritalStatusOptions: OptionType[];
+  educationLevel: OptionType;
+  educationLevelOptions: OptionType[];
+  handleEducationLevelChange: (e: OptionType) => void;
+  handleGraduationCourseChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  graduationCourse: string;
   getErrorMessageByFieldName: GetErrorMessageByFieldNameType;
   isEdit: boolean;
 }
@@ -48,6 +53,11 @@ export default function GeneralDataCard({
   maritalStatusOptions,
   childrenAmount,
   handleChildrenAmountChange,
+  educationLevel,
+  educationLevelOptions,
+  handleEducationLevelChange,
+  handleGraduationCourseChange,
+  graduationCourse,
   isEdit,
 }: IGeneralDataCard) {
   const { selectedTheme } = useThemeContext();
@@ -76,7 +86,7 @@ export default function GeneralDataCard({
             <FilterRadioButton selected={gender === 'male'} onClick={() => handleGenderChange('male')}>
               Masculino
             </FilterRadioButton>
-            <FilterRadioButton selected={gender === 'male'} onClick={() => handleGenderChange('female')}>
+            <FilterRadioButton selected={gender === 'female'} onClick={() => handleGenderChange('female')}>
               Feminino
             </FilterRadioButton>
           </FilterRadioButtonsContainer>
@@ -116,6 +126,7 @@ export default function GeneralDataCard({
             onChange={handleBirthDateChange}
             autoComplete="new-password"
             error={getErrorMessageByFieldName('birthDate')}
+            type="date"
           />
         </FormGroup>
 
@@ -134,16 +145,42 @@ export default function GeneralDataCard({
         </FormGroup>
       </AsideContainer>
 
-      <FormGroup error={getErrorMessageByFieldName('childrenAmount')} marginTop={16}>
-        <label htmlFor="login">Quantidade de Filhos</label>
-        <Input
-          placeholder='Se não houver, preencha 0'
-          value={childrenAmount}
-          onChange={handleChildrenAmountChange}
-          autoComplete="new-password"
-          error={getErrorMessageByFieldName('childrenAmount')}
-        />
-      </FormGroup>
+      <AsideContainer>
+        <FormGroup error={getErrorMessageByFieldName('childrenAmount')} aside>
+          <label htmlFor="login">Quantidade de Filhos</label>
+          <Input
+            placeholder='Se não houver, preencha 0'
+            value={childrenAmount}
+            onChange={handleChildrenAmountChange}
+            autoComplete="new-password"
+            error={getErrorMessageByFieldName('childrenAmount')}
+          />
+        </FormGroup>
+
+        <FormGroup aside>
+          <label htmlFor="login">Escolaridade</label>
+          <Select
+            value={{ value: educationLevel?.value, label: educationLevel?.label }}
+            options={educationLevelOptions}
+            onChange={(opt) => {
+              handleEducationLevelChange(opt!);
+            }}
+            styles={selectedTheme === 'dark' ? CustomStyleDarkTheme : CustomStyle}
+            classNamePrefix="react-select"
+            className="react-select-container"
+          />
+        </FormGroup>
+
+        <FormGroup aside>
+          <label htmlFor="login">Curso Realizado</label>
+          <Input
+            placeholder='Curso da Graduação realizado'
+            value={graduationCourse}
+            onChange={handleGraduationCourseChange}
+            autoComplete="new-password"
+          />
+        </FormGroup>
+      </AsideContainer>
     </StyledContainer>
   );
 }

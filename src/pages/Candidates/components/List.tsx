@@ -33,9 +33,9 @@ export default function List({
                 <div className="info">
                   <div className="card-title">
                     <strong>{candidate.name}</strong>
+                    {smallTagRenderByStatusLiterals[candidate.status]}
                   </div>
 
-                  {smallTagRenderByStatusLiterals[candidate.status]}
                   <span>
                     E-mail:
                     {' '}

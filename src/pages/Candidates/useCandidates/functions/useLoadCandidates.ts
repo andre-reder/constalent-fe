@@ -26,6 +26,7 @@ export default function useLoadCandidates({
   const { apiCall } = useApiCall();
 
   const educationLevelOptions = useMemo(() => ([
+    { value: '', label: 'Todos' },
     { value: 'fundamental', label: 'Ensino Fundamental' },
     { value: 'medium', label: 'Ensino Médio' },
     { value: 'superior', label: 'Superior' },
@@ -35,6 +36,7 @@ export default function useLoadCandidates({
   ]), []);
 
   const statusOptions = useMemo(() => ([
+    { value: '', label: 'Todos' },
     { value: 'stored', label: 'Disponível' },
     { value: 'applied', label: 'Aplicado' },
     { value: 'hired', label: 'Contratado' },
@@ -70,7 +72,7 @@ export default function useLoadCandidates({
         const allGraduationCourses = response.candidates.map(candidate => candidate.graduationCourse);
         const uniqueGraduationCourses: string[] = removeDuplicates(allGraduationCourses);
         const mappedGraduationCourses = uniqueGraduationCourses.map(course => ({ value: course, label: course }));
-        setGraduationCourseOptions(mappedGraduationCourses);
+        setGraduationCourseOptions([{ value: '', label: 'Todos' }, ...mappedGraduationCourses]);
       },
     })
   }, [apiCall, setCurrentPage, setFilteredCandidates, setCandidatesSplitted]);

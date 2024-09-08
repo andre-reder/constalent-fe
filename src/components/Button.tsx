@@ -8,12 +8,17 @@ interface ButtonInterface extends React.ButtonHTMLAttributes<HTMLButtonElement> 
   cancel?: boolean;
   tooltip?: string;
   tooltipExplanation?: string;
+  width?: string;
 }
 
-const Container = styled.div`
+interface IContainer {
+  width?: string;
+}
+
+const Container = styled.div<IContainer>`
   position: relative;
   display: inline-block; /* Para envolver o botão */
-  width: 100%;
+  width: ${({ width }) =>  width || '100%'};
 `;
 
 const Button = styled.button<ButtonInterface>`
@@ -93,7 +98,7 @@ const Tooltip = styled.div`
   opacity: 0.9;
   `;
 
-const CustomButton: React.FC<ButtonInterface> = ({ tooltip, tooltipExplanation, ...props }) => {
+const CustomButton: React.FC<ButtonInterface> = ({ tooltip, tooltipExplanation, width, ...props }) => {
   const [showTooltip, setShowTooltip] = useState(false);
   const timeoutRef = useRef<number | null>(null);
 
@@ -113,6 +118,7 @@ const CustomButton: React.FC<ButtonInterface> = ({ tooltip, tooltipExplanation, 
     <Container
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      width={width}
     >
       <Button {...props}>
         {props.children}

@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { ReactNode } from 'react';
 import Spinner from '../Spinner';
 import { Container } from './styles';
@@ -7,15 +6,15 @@ export interface FormGroupInterface {
   children: ReactNode;
   error?: string | null;
   isLoading?: boolean;
-  isAside?: boolean;
+  aside?: boolean;
   marginTop?: number;
 }
 
 export default function FormGroup({
-  children, error, isLoading, isAside, marginTop
+  children, error, isLoading, aside, marginTop
 }: FormGroupInterface) {
   return (
-    <Container isAside={isAside} marginTop={marginTop}>
+    <Container isAside={aside} marginTop={marginTop}>
       <div className="form-item">
         { children }
 
@@ -29,16 +28,3 @@ export default function FormGroup({
     </Container>
   );
 }
-
-FormGroup.propTypes = {
-  children: PropTypes.node.isRequired,
-  error: PropTypes.string,
-  isLoading: PropTypes.bool,
-  aside: PropTypes.bool,
-};
-
-FormGroup.defaultProps = {
-  error: null,
-  isLoading: false,
-  aside: false,
-};

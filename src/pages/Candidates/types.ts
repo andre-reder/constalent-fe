@@ -13,7 +13,7 @@ export type CandidateType = {
   resume: string;
   psycologicalTest?: string;
   candidatesForm?: string;
-  salaryExpected: string;
+  salaryExpected: number;
   birthDate: Date;
   gender: GenderType;
   educationLevel: EducationLevelType;

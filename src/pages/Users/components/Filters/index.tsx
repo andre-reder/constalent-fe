@@ -2,7 +2,7 @@
 import Select from 'react-select';
 
 import { CustomStyle } from '../../../../components/CustomSelectStyle';
-import { CustomStyle as CustomStyleDarkTheme } from '../../../../components/CustomSelectStyleDarkTheme';
+import { CustomStyleDarkTheme } from '../../../../components/CustomSelectStyleDarkTheme';
 import { Container } from './styles';
 
 import { Dispatch, SetStateAction } from 'react';

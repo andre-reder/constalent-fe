@@ -13,6 +13,9 @@ interface IFilesCard {
   handleCandidatesFormUpload: (event: ChangeEvent<HTMLInputElement>) => void;
   handleRemoveCandidatesForm: () => void;
   candidatesFormFileName: string;
+  downloadResume?: () => void;
+  downloadPsycologicalTest?: () => void;
+  downloadCandidatesForm?: () => void;
 }
 
 export default function FilesCard({
@@ -25,6 +28,9 @@ export default function FilesCard({
   handleCandidatesFormUpload,
   handleRemoveCandidatesForm,
   candidatesFormFileName,
+  downloadResume,
+  downloadPsycologicalTest,
+  downloadCandidatesForm,
 }: IFilesCard) {
   return (
     <StyledContainer>
@@ -40,6 +46,7 @@ export default function FilesCard({
               acceptedFiles=".pdf, .doc, .docx"
               hasSubmitAction={false}
               removeFile={handleRemoveResume}
+              downloadFile={downloadResume}
             />
         </FormGroup>
 
@@ -51,6 +58,7 @@ export default function FilesCard({
               acceptedFiles=".pdf, .doc, .docx"
               hasSubmitAction={false}
               removeFile={removePsycologicalTest}
+              downloadFile={downloadPsycologicalTest}
             />
         </FormGroup>
 
@@ -62,6 +70,7 @@ export default function FilesCard({
               acceptedFiles=".pdf, .doc, .docx"
               hasSubmitAction={false}
               removeFile={handleRemoveCandidatesForm}
+              downloadFile={downloadCandidatesForm}
             />
         </FormGroup>
     </StyledContainer>

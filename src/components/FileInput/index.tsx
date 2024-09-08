@@ -14,6 +14,7 @@ interface FileInputInterface {
   acceptedFiles: string;
   hasSubmitAction?: boolean;
   removeFile?: () => void;
+  downloadFile?: () => void;
 }
 
 export default function FileInput({
@@ -25,6 +26,7 @@ export default function FileInput({
   acceptedFiles,
   hasSubmitAction = true,
   removeFile,
+  downloadFile,
 }: FileInputInterface) {
   const hiddenFileInput = useRef<HTMLInputElement>(null);
   const handleClick = () => {
@@ -33,10 +35,10 @@ export default function FileInput({
 
   return (
     <>
-      <StepsContainer>
+      <StepsContainer justifyContent={hasSubmitAction ? 'space-around' : 'flex-start'}>
         <FileInputContainer>
           <ButtonsContainer>
-            <Button small={!hasSubmitAction} type="button" className="file" onClick={handleClick}>
+            <Button small={!hasSubmitAction} type="button" className="file" onClick={handleClick} width='unset'>
               {fileNameChoosed ? 'Alterar Arquivo' : 'Escolher Arquivo'}
             </Button>
             {removeFile && fileNameChoosed && (
@@ -44,7 +46,12 @@ export default function FileInput({
                 Remover arquivo
               </SecondaryButton>
             )}
-            </ButtonsContainer>
+            {downloadFile && fileNameChoosed && (
+              <SecondaryButton small={!hasSubmitAction} onClick={() => downloadFile()}>
+                Visualizar arquivo
+              </SecondaryButton>
+            )}
+          </ButtonsContainer>
           <Input
             type="file"
             style={{ display: 'none' }}

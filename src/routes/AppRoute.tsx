@@ -6,6 +6,8 @@ import {
 } from 'react-router-dom';
 import Applications from '../pages/Applications';
 import Candidates from '../pages/Candidates';
+import EditCandidate from '../pages/Candidates/EditCandidate';
+import NewCandidate from '../pages/Candidates/NewCandidate';
 import Companies from '../pages/Companies';
 import EditCompany from '../pages/Companies/EditCompany';
 import NewCompany from '../pages/Companies/NewCompany';
@@ -28,7 +30,11 @@ export function AppRoute() {
       >
         <Route path="/" element={<Home />} />
         <Route path="/vacancies" element={<Vacancies />} />
+
         <Route path="/candidates" element={<Candidates />} />
+        <Route path="/candidates/new" element={<NewCandidate />} />
+        <Route path="/candidates/:id" element={<EditCandidate />} />
+
         <Route path="/applications" element={<Applications />} />
         <Route path="/interviews" element={<Interviews />} />
 

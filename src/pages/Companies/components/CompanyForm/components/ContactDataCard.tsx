@@ -34,7 +34,7 @@ export default function ContactDataCard({
       </div>
 
       <AsideContainer>
-        <FormGroup error={getErrorMessageByFieldName('contactName')} isAside>
+        <FormGroup error={getErrorMessageByFieldName('contactName')} aside>
           <label htmlFor="login">Nome *</label>
           <Input
             placeholder="Nome do contato"
@@ -45,7 +45,7 @@ export default function ContactDataCard({
           />
         </FormGroup>
 
-        <FormGroup error={getErrorMessageByFieldName('phone')} isAside>
+        <FormGroup error={getErrorMessageByFieldName('phone')} aside>
           <label htmlFor="login">Celular / Telefone</label>
           <Input
             placeholder="(00) 00000-0000"
@@ -58,7 +58,7 @@ export default function ContactDataCard({
       </AsideContainer>
 
       <AsideContainer>
-        <FormGroup error={getErrorMessageByFieldName('email')} isAside>
+        <FormGroup error={getErrorMessageByFieldName('email')} aside>
           <label htmlFor="login">E-mail</label>
           <Input
             placeholder="E-mail"
@@ -69,7 +69,7 @@ export default function ContactDataCard({
           />
         </FormGroup>
 
-        <FormGroup error={getErrorMessageByFieldName('contactRole')} isAside>
+        <FormGroup error={getErrorMessageByFieldName('contactRole')} aside>
           <label htmlFor="login">Cargo</label>
           <Input
             placeholder="Cargo"

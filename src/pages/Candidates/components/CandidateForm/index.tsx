@@ -69,6 +69,14 @@ export default function CandidateForm({ isEdit = false }: ICandidateForm) {
     handleCandidatesFormUpload,
     handleRemoveCandidatesForm,
     candidatesFormFileName,
+    downloadResume,
+    downloadPsycologicalTest,
+    downloadCandidatesForm,
+    educationLevel,
+    handleGraduationCourseChange,
+    graduationCourse,
+    educationLevelOptions,
+    handleEducationLevelChange,
   } = useCandidateForm({ isEdit });
 
   return (
@@ -99,6 +107,11 @@ export default function CandidateForm({ isEdit = false }: ICandidateForm) {
               childrenAmount={childrenAmount}
               handleChildrenAmountChange={handleChildrenAmountChange}
               maritalStatusOptions={maritalStatusOptions}
+              educationLevel={educationLevel}
+              handleGraduationCourseChange={handleGraduationCourseChange}
+              graduationCourse={graduationCourse}
+              educationLevelOptions={educationLevelOptions}
+              handleEducationLevelChange={handleEducationLevelChange}
               isEdit={isEdit}
             />
           </Col>
@@ -160,6 +173,9 @@ export default function CandidateForm({ isEdit = false }: ICandidateForm) {
               handleCandidatesFormUpload={handleCandidatesFormUpload}
               handleRemoveCandidatesForm={handleRemoveCandidatesForm}
               candidatesFormFileName={candidatesFormFileName}
+              downloadResume={downloadResume}
+              downloadPsycologicalTest={downloadPsycologicalTest}
+              downloadCandidatesForm={downloadCandidatesForm}
             />
           </Col>
         </Row>

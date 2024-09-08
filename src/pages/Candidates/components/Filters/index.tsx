@@ -2,7 +2,7 @@
 import Select from 'react-select';
 
 import { CustomStyle } from '../../../../components/CustomSelectStyle';
-import { CustomStyle as CustomStyleDarkTheme } from '../../../../components/CustomSelectStyleDarkTheme';
+import { CustomStyleDarkTheme } from '../../../../components/CustomSelectStyleDarkTheme';
 import { Container } from './styles';
 
 import { Dispatch, SetStateAction } from 'react';
@@ -82,7 +82,6 @@ export default function Filters({
           className="react-select-container-as-filter"
         />
 
-      </div>
         <FilterRadioButtonsContainer>
           <FilterRadioButton onClick={() => setGender('')} selected={gender === ''}>
             Todos
@@ -96,6 +95,7 @@ export default function Filters({
             Feminino
           </FilterRadioButton>
         </FilterRadioButtonsContainer>
+      </div>
     </Container>
   );
 }
