@@ -102,6 +102,11 @@ export const Card = styled.div<CardInterface>`
         background: ${({ theme }) => theme.colors.gray[100]};
         color: ${({ theme }) => theme.colors.gray[900]};
       }
+
+      small.red {
+        background: ${({ theme }) => theme.colors.danger.light};
+        color: ${({ theme }) => theme.colors.danger.dark};
+      }
     }
 
     span {
