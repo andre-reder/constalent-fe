@@ -43,7 +43,7 @@ export default function FilesCard({
           <FileInput
               onFileUpload={handleResumeUpload}
               fileNameChoosed={resumeFileName}
-              acceptedFiles=".pdf, .doc, .docx"
+              acceptedFiles=".pdf, .doc, .docx, .xls, .xlsx, .csv"
               hasSubmitAction={false}
               removeFile={handleRemoveResume}
               downloadFile={downloadResume}
@@ -55,7 +55,7 @@ export default function FilesCard({
           <FileInput
               onFileUpload={handlePsycologicalTestUpload}
               fileNameChoosed={psycologicalTestFileName}
-              acceptedFiles=".pdf, .doc, .docx"
+              acceptedFiles=".pdf, .doc, .docx, .xls, .xlsx, .csv"
               hasSubmitAction={false}
               removeFile={removePsycologicalTest}
               downloadFile={downloadPsycologicalTest}
@@ -67,7 +67,7 @@ export default function FilesCard({
           <FileInput
               onFileUpload={handleCandidatesFormUpload}
               fileNameChoosed={candidatesFormFileName}
-              acceptedFiles=".pdf, .doc, .docx"
+              acceptedFiles=".pdf, .doc, .docx, .xls, .xlsx, .csv"
               hasSubmitAction={false}
               removeFile={handleRemoveCandidatesForm}
               downloadFile={downloadCandidatesForm}

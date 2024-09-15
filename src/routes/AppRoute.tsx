@@ -13,6 +13,8 @@ import EditCompany from '../pages/Companies/EditCompany';
 import NewCompany from '../pages/Companies/NewCompany';
 import Home from '../pages/Home';
 import Interviews from '../pages/Interviews';
+import EditInterview from '../pages/Interviews/EditInterview';
+import NewInterview from '../pages/Interviews/NewInterview';
 import NotFound from '../pages/NotFound';
 import Users from '../pages/Users';
 import EditUser from '../pages/Users/EditUser';
@@ -41,7 +43,10 @@ export function AppRoute() {
         <Route path="/candidates/:id" element={<EditCandidate />} />
 
         <Route path="/applications" element={<Applications />} />
+
         <Route path="/interviews" element={<Interviews />} />
+        <Route path="/interviews/new" element={<NewInterview />} />
+        <Route path="/interviews/:id" element={<EditInterview />} />
 
         <Route path="/users" element={<Users />} />
         <Route path="/users/new" element={<NewUser />} />

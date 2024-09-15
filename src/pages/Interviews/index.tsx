@@ -3,8 +3,10 @@ import Loader from "../../components/Loader";
 import NoData from "../../components/NoData";
 import OpacityAnimation from "../../components/OpacityAnimation";
 import SearchAtPage from "../../components/SearchAtPage";
+import CandidatesDocsModal from "./components/CandidatesDocsModal";
 import DeleteInterviewModal from "./components/DeleteInterviewModal";
 import Filters from "./components/Filters";
+import InterviewDetailsModal from "./components/InterviewsDetailsModal";
 import List from "./components/List";
 import ListHeader from "./components/ListHeader";
 import useInterviews from "./useInterviews";
@@ -38,6 +40,15 @@ export default function Interviews() {
     deleteInterview,
     handleOpenDeleteModal,
     handleTryAgain,
+    interviewBeingViewedCandidatesDocs,
+    candidatesDocs,
+    candidatesDocsModalShow,
+    setCandidatesDocsModalShow,
+    onOpenCandidatesDocsModal,
+    onOpenInterviewDetailsModal,
+    interviewDetails,
+    interviewDetailsModalShow,
+    setInterviewDetailsModalShow,
   } = useInterviews();
 
   const hasInterviews = interviews?.length !== 0 && !!interviews;
@@ -92,6 +103,8 @@ export default function Interviews() {
           <List
             filteredList={filteredInterviews}
             onOpenDeleteModal={handleOpenDeleteModal}
+            onOpenCandidatesDocsModal={onOpenCandidatesDocsModal}
+            onOpenInterviewDetailsModal={onOpenInterviewDetailsModal}
           />
         )}
 
@@ -138,6 +151,19 @@ export default function Interviews() {
             )}
           />
         )}
+
+        <InterviewDetailsModal
+          interviewDetails={interviewDetails}
+          interviewDetailsModalShow={interviewDetailsModalShow}
+          setInterviewDetailsModalShow={setInterviewDetailsModalShow}
+        />
+
+        <CandidatesDocsModal
+          interviewBeingViewedCandidatesDocs={interviewBeingViewedCandidatesDocs}
+          candidatesDocs={candidatesDocs}
+          candidatesDocsModalShow={candidatesDocsModalShow}
+          setCandidatesDocsModalShow={setCandidatesDocsModalShow}
+        />
       </OpacityAnimation>
     </>
   );

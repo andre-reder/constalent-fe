@@ -79,6 +79,7 @@ export default function useCandidateForm({ isEdit }: { isEdit: boolean}) {
   const educationLevelOptions: OptionType[] = useMemo(() => ([
     { value: 'fundamental', label: 'Ensino Fundamental' },
     { value: 'medium', label: 'Ensino Médio' },
+    { value: 'technical', label: 'Técnico' },
     { value: 'superior', label: 'Superior' },
     { value: 'postGraduation', label: 'Pós-Graduação' },
     { value: 'master', label: 'Mestrado' },
@@ -370,6 +371,7 @@ export default function useCandidateForm({ isEdit }: { isEdit: boolean}) {
           return;
         }
         toast.success('Candidato Adicionado com sucesso!');
+        setCandidateName('');
         setEmail('');
         setStreetName('');
         setStreetNumber('');
@@ -422,8 +424,8 @@ export default function useCandidateForm({ isEdit }: { isEdit: boolean}) {
         { key: 'maritalStatus', value: maritalStatus.value },
         { key: 'childrenAmount', value: childrenAmount },
         { key: 'linkedin', value: linkedin },
-        { key: 'salaryExpected', value: salaryExpected },
-        { key: 'lastSalary', value: lastSalary },
+        { key: 'salaryExpected', value: parseCurrencyStringToFloat(salaryExpected) },
+        { key: 'lastSalary', value: parseCurrencyStringToFloat(lastSalary) },
         { key: 'lastCompany', value: lastCompany },
         { key: 'lastPosition', value: lastPosition },
         { key: 'resume', value: resume },

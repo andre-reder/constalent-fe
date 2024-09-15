@@ -49,7 +49,7 @@ class InterviewsService {
     reqBody,
     id,
   }: IInterviewsService) => {
-    return this.httpClient.post({
+    return this.httpClient.put({
       path: `/interviews/${id}`,
       token,
       reqBody,

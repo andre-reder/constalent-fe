@@ -20,7 +20,7 @@ export default function List({
   const smallTagRenderByStatusLiterals: { [key: string]: ReactNode } = {
     'stored': <small>Disponível</small>,
     'applied': <small className='orange'>Em Aplicação</small>,
-    'hired': <small className='green'>Em Aplicação</small>,
+    'hired': <small className='green'>Contratado</small>,
   }
 
   return (

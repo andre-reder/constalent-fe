@@ -6,6 +6,7 @@ interface ICandidatesService {
   reqBody?: ReqBodyType;
   token: string;
   id?: string;
+  vacancyId?: string;
 }
 
 class CandidatesService {
@@ -19,6 +20,16 @@ class CandidatesService {
   }: ICandidatesService) => {
     return this.httpClient.get({
       path: '/candidates',
+      token,
+    });
+  }
+
+  getResumedCandidatesAvailableForVacancy = async ({
+    token,
+    vacancyId,
+  }: ICandidatesService) => {
+    return this.httpClient.get({
+      path: `/candidates/resumed/${vacancyId}`,
       token,
     });
   }
@@ -50,7 +61,7 @@ class CandidatesService {
     reqBody,
     id,
   }: ICandidatesService) => {
-    return this.httpClient.post({
+    return this.httpClient.put({
       path: `/candidates/${id}`,
       token,
       reqBody,

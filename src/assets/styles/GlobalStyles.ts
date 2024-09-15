@@ -92,6 +92,7 @@ export const GlobalStyles = createGlobalStyle<GlobalStyleInterface>`
     && 'invert(0%) sepia(7%) saturate(7500%) hue-rotate(331deg) brightness(105%) contrast(105%)')};
     filter: ${({ theme }) => ((theme.colors.background === '#121212')
     && 'invert(100%) sepia(0%) saturate(25%) hue-rotate(50deg) brightness(105%) contrast(106%)')};
+    margin-right: 4px;
   }
 
   a {

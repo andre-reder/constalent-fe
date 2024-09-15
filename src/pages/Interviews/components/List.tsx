@@ -3,6 +3,8 @@ import { ReactNode } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import edit from '../../../assets/images/icons/edit.svg';
+import eyeGreen from '../../../assets/images/icons/eyeGreen.svg';
+import fileDownload from '../../../assets/images/icons/fileDownload.svg';
 import trash from '../../../assets/images/icons/trash.svg';
 import { Card } from '../../../components/Card';
 import OpacityAnimation from '../../../components/OpacityAnimation';
@@ -12,11 +14,15 @@ import { InterviewType } from '../types';
 interface ListInterface {
   filteredList: InterviewType[];
   onOpenDeleteModal: (interview: InterviewType) => void;
+  onOpenCandidatesDocsModal: (interview: InterviewType) => Promise<void>;
+  onOpenInterviewDetailsModal: (interview: InterviewType) => void;
 }
 
 export default function List({
   filteredList,
   onOpenDeleteModal,
+  onOpenCandidatesDocsModal,
+  onOpenInterviewDetailsModal,
 }: ListInterface) {
   const smallTagRenderByStatusLiterals: { [key: string]: ReactNode } = {
     'scheduled': <small>Agendada</small>,
@@ -50,7 +56,7 @@ export default function List({
                   <span>
                     Data:
                     {' '}
-                    {format(new Date(interview.date), 'dd/MM/yyyy') || 'Não informado'}
+                    {format(new Date(interview.date), 'dd/MM/yyyy\' às \'HH:mm') || 'Não informado'}
                   </span>
 
                   <span>
@@ -60,6 +66,21 @@ export default function List({
                   </span>
                 </div>
                 <div className="actions">
+                  <button
+                    type="button"
+                    onClick={() => onOpenInterviewDetailsModal(interview)}
+                  >
+                    <img src={eyeGreen} alt="" title={`Visualizar detalhes da entrevista`} />
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => onOpenCandidatesDocsModal(interview)}
+                  >
+                    <img src={fileDownload} alt="" title={`Baixar documentos do candidato`} />
+                  </button>
+
+
                   {(!isCustomer || interview.type === 'company') && (
                     <>
                       <Link to={`/interviews/${interview.id}?active=Interviews`}>

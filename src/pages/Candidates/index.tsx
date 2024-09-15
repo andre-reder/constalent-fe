@@ -3,6 +3,7 @@ import Loader from "../../components/Loader";
 import NoData from "../../components/NoData";
 import OpacityAnimation from "../../components/OpacityAnimation";
 import SearchAtPage from "../../components/SearchAtPage";
+import { useAppContext } from "../../contexts/auth";
 import DeleteCandidateModal from "./components/DeleteCandidateModal";
 import Filters from "./components/Filters";
 import List from "./components/List";
@@ -43,6 +44,8 @@ export default function Candidates() {
   const filteredListLength = filteredCandidates?.length ?? 0;
   const searchNotFound = filteredListLength === 0 && hasCandidates;
   const isListEmpty = !hasError && (!isLoading && candidates.length === 0);
+  const { user } = useAppContext();
+  const isCustomer = user?.role === 'customer';
 
   return (
     <>
@@ -126,12 +129,23 @@ export default function Candidates() {
           />
         )}
 
-        {isListEmpty && (
+        {isListEmpty && !isCustomer && (
           <NoData
             icon="emptyBox"
             label={(
               <>
                 Não há nenhum candidato cadastrado. Clique no botão <br /> <strong>Novo Candidato</strong> <br /> acima para cadastrar seu primeiro!
+              </>
+            )}
+          />
+        )}
+
+        {isListEmpty && isCustomer && (
+          <NoData
+            icon="emptyBox"
+            label={(
+              <>
+                Não há nenhum candidato am aplicação para alguma de suas vagas.
               </>
             )}
           />

@@ -58,7 +58,7 @@ class CompaniesService {
     reqBody,
     id,
   }: ICompaniesService) => {
-    return this.httpClient.post({
+    return this.httpClient.put({
       path: `/companies/${id}`,
       token,
       reqBody,

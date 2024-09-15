@@ -37,6 +37,7 @@ export default function useLoadVacancies({
     { value: '', label: 'Todos' },
     { value: 'fundamental', label: 'Ensino Fundamental' },
     { value: 'medium', label: 'Ensino Médio' },
+    { value: 'technical', label: 'Técnico' },
     { value: 'superior', label: 'Superior' },
     { value: 'postGraduation', label: 'Pós-graduação' },
     { value: 'master', label: 'Mestrado' },

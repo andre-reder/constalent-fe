@@ -51,10 +51,18 @@ export default function List({
                   </span>
 
                   <span>
-                    Aberta em:
+                    Criada em:
                     {' '}
                     {format(new Date(vacancy.createdAt), 'dd/MM/yyyy') || 'Não informado'}
                   </span>
+
+                  {vacancy.openedAt && vacancy.status === 'open' && (
+                    <span>
+                      Aberta em:
+                      {' '}
+                      {format(new Date(vacancy.openedAt), 'dd/MM/yyyy') || 'Não informado'}
+                    </span>
+                  )}
 
                   {vacancy.canceledAt && vacancy.status === 'canceled' && (
                     <span>

@@ -23,6 +23,15 @@ class VacanciesService {
     });
   }
 
+  getVacanciesResumed = async ({
+    token,
+  }: IVacanciesService) => {
+    return this.httpClient.get({
+      path: '/vacancies/resumed',
+      token,
+    });
+  }
+
   getVacancy = async ({
     token,
     id,
@@ -49,7 +58,7 @@ class VacanciesService {
     reqBody,
     id,
   }: IVacanciesService) => {
-    return this.httpClient.post({
+    return this.httpClient.put({
       path: `/vacancies/${id}`,
       token,
       reqBody,

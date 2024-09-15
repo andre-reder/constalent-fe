@@ -65,13 +65,14 @@ export default function useVacancyForm({ isEdit }: IUseVacancyForm) {
   const statusOptions = useMemo(() => ([
     { value: 'waiting', label: 'Em Espera' },
     { value: 'open', label: 'Aberta' },
-    { value: 'finished', label: 'Finalizada' },
+    // { value: 'finished', label: 'Finalizada' },
     { value: 'canceled', label: 'Cancelada' },
   ]), []);
 
   const educationLevelOptions = useMemo(() => ([
     { value: 'fundamental', label: 'Ensino Fundamental' },
     { value: 'medium', label: 'Ensino Médio' },
+    { value: 'technical', label: 'Técnico' },
     { value: 'superior', label: 'Superior' },
     { value: 'postGraduation', label: 'Pós-graduação' },
     { value: 'master', label: 'Mestrado' },
@@ -448,7 +449,7 @@ export default function useVacancyForm({ isEdit }: IUseVacancyForm) {
         needsExtraHours,
         minAge: Number(minAge) || 0,
         maxAge: Number(maxAge),
-        gender,
+        gender: gender || 'indistinct',
         educationLevel: educationLevel.value,
         benefits: benefits.map((benefit) => benefit.value),
         otherBenefits,
@@ -458,7 +459,7 @@ export default function useVacancyForm({ isEdit }: IUseVacancyForm) {
         desirableRequirements,
         willApplicantBeTested,
         alignmentMeetingDate: alignmentMeetingDate ? new Date(alignmentMeetingDate) : '',
-        suggestionsOfAlignmentMeetingDates: suggestionsOfAlignmentMeetingDates.map((date) => new Date(date)),
+        suggestionsOfAlignmentMeetingDates: suggestionsOfAlignmentMeetingDates.map((date) => new Date(date)).filter((date) => !!date),
         isReposition,
       }),
       onStartLoad: () => setIsLoading(true),
@@ -514,6 +515,7 @@ export default function useVacancyForm({ isEdit }: IUseVacancyForm) {
   const updateVacancy = useCallback(async () => {
     await apiCall({
       apiToCall: vacanciesService.updateVacancy,
+      queryParams: { id: vacancyBeingEditted.id },
       reqBody: JSON.stringify({
         title,
         locationCep,
@@ -564,7 +566,7 @@ export default function useVacancyForm({ isEdit }: IUseVacancyForm) {
         navigate('/vacancies?active=Vacancies');
       },
     })
-  }, [additionalInfo, alignmentMeetingDate, apiCall, benefits, company.value, contractType.value, department, description, desirableExperience, desirableRequirements, educationLevel.value, gender, hasVariableComissions, isCustomer, isReposition, isSecret, level.value, locationCep, maxAge, maxSalary, minAge, minExperience, minSalary, navigate, necessaryRequirements, needsExtraHours, needsTravel, operatingModel.value, otherBenefits, reasonForOpening, responsibleEmail, responsibleName, responsiblePhone, status.value, subordinatesAmount, suggestionsOfAlignmentMeetingDates, title, user?.companyId, vacanciesAmount, willApplicantBeTested, workingSchedule]);
+  }, [additionalInfo, alignmentMeetingDate, apiCall, benefits, company.value, contractType.value, department, description, desirableExperience, desirableRequirements, educationLevel.value, gender, hasVariableComissions, isCustomer, isReposition, isSecret, level.value, locationCep, maxAge, maxSalary, minAge, minExperience, minSalary, navigate, necessaryRequirements, needsExtraHours, needsTravel, operatingModel.value, otherBenefits, reasonForOpening, responsibleEmail, responsibleName, responsiblePhone, status?.value, subordinatesAmount, suggestionsOfAlignmentMeetingDates, title, user?.companyId, vacanciesAmount, vacancyBeingEditted.id, willApplicantBeTested, workingSchedule]);
 
   const loadPage = useCallback(async () => {
     let companiesOptions: OptionType[] = [];
@@ -574,7 +576,7 @@ export default function useVacancyForm({ isEdit }: IUseVacancyForm) {
       actionAfterResponse: (response: { success: boolean, companies: { name: string, id: string }[] }) => {
         if (!response.success) {
           toast.error('Não foi possível carregar as opções de empresas.');
-          navigate('/users?active=Users');
+          navigate('/interviews?active=Interviews');
           return;
         }
         const mappedCompanies = [{ value: '', label: 'Selecione uma Empresa'}].concat(response.companies.map(cp => ({ value: cp.id, label: cp.name })));

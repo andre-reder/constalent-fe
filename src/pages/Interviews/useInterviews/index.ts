@@ -1,5 +1,7 @@
 import { useMemo } from "react";
+import useCandidatesDocs from "./functions/useCandidatesDocs";
 import useDeleteInterview from "./functions/useDeleteInterview";
+import useInterviewDetails from "./functions/useInterviewDetails";
 import useLoadInterviews from "./functions/useLoadInterviews";
 import usePagination from "./functions/usePagination";
 import useSearches from "./functions/useSearches";
@@ -60,7 +62,23 @@ export default function useInterviews() {
     setSearchTerm,
   });
 
-  const isLoading = isLoadLoading || isDeletingInterview;
+  const {
+    interviewBeingViewedCandidatesDocs,
+    onOpenCandidatesDocsModal,
+    candidatesDocsModalShow,
+    setCandidatesDocsModalShow,
+    candidatesDocs,
+    isGettingCandidatesDocs,
+  } = useCandidatesDocs();
+
+  const {
+    onOpenInterviewDetailsModal,
+    interviewDetails,
+    interviewDetailsModalShow,
+    setInterviewDetailsModalShow,
+  } = useInterviewDetails();
+
+  const isLoading = isLoadLoading || isDeletingInterview || isGettingCandidatesDocs;
 
   const updatedVacancyOptionsBySelectedCompany = useMemo(() => vacancyOptions.filter((vcyOpt) => {
     const interviewsOfCompany = interviews.filter((interview) => interview.company.id === company.value);
@@ -104,5 +122,14 @@ export default function useInterviews() {
     deleteInterview,
     handleOpenDeleteModal,
     handleTryAgain,
+    interviewBeingViewedCandidatesDocs,
+    candidatesDocs,
+    candidatesDocsModalShow,
+    setCandidatesDocsModalShow,
+    onOpenCandidatesDocsModal,
+    onOpenInterviewDetailsModal,
+    interviewDetails,
+    interviewDetailsModalShow,
+    setInterviewDetailsModalShow,
   }
 }

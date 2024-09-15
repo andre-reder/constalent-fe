@@ -1,4 +1,4 @@
-export type OptionType = { value: string, label: string }
+export type OptionType = { value: string, label: string, companyId?: string }
 export type InterviewTypeType = 'recruiter' | 'company';
 export type InterviewStatusType = 'scheduled' | 'canceled' | 'approved' | 'rejected';
 
@@ -19,4 +19,10 @@ export type GetInterviewsApiResponse = {
   success: boolean;
   message: string;
   interviews: InterviewType[];
+}
+export type CandidatesDocsType = {
+  id: string;
+  resume: string;
+  psycologicalTest?: string;
+  candidatesForm?: string;
 }

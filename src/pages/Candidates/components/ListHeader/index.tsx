@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import OpacityAnimation from '../../../../components/OpacityAnimation';
 import Pagination from '../../../../components/Pagination';
+import { useAppContext } from '../../../../contexts/auth';
 import { Header } from './styles';
 
 interface ListHeaderInterface {
@@ -24,6 +25,9 @@ export default function ListHeader({
   currentPage,
   onPageChange,
 }: ListHeaderInterface) {
+  const { user } = useAppContext();
+  const isCustomer = user?.role === 'customer';
+
   return (
     <OpacityAnimation delay={0.1}>
       <Header doesListExists={doesListExists} apiFetched={!hasError}>
@@ -44,11 +48,13 @@ export default function ListHeader({
 
           </>
         )}
-        <div className="actionButtons">
-          <Link to='/candidates/new?active=Candidates'>
-            Novo Candidato
-          </Link>
-        </div>
+        {!isCustomer && (
+          <div className="actionButtons">
+            <Link to='/candidates/new?active=Candidates'>
+              Novo Candidato
+            </Link>
+          </div>
+        )}
       </Header>
     </OpacityAnimation>
   );

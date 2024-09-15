@@ -28,9 +28,9 @@ export default function useSearches({
       );
 
       const statusFilter = vacancy.status === status.value || status.value === '';
-      const operatingModelFilter = operatingModel.value === vacancy.educationLevel || operatingModel.value === '';
-      const contractTypeFilter = contractType.value === vacancy.educationLevel || contractType.value === '';
-      const vacancyLevelFilter = vacancyLevel.value === vacancy.educationLevel || vacancyLevel.value === '';
+      const operatingModelFilter = operatingModel.value === vacancy.operatingModel || operatingModel.value === '';
+      const contractTypeFilter = contractType.value === vacancy.contractType || contractType.value === '';
+      const vacancyLevelFilter = vacancyLevel.value === vacancy.level || vacancyLevel.value === '';
       const educationLevelFilter = educationLevel.value === vacancy.educationLevel || educationLevel.value === '';
       const companyFilter = company.value === vacancy.company.id || company.value === '';
 

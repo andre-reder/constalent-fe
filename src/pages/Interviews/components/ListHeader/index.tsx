@@ -24,6 +24,7 @@ export default function ListHeader({
   currentPage,
   onPageChange,
 }: ListHeaderInterface) {
+
   return (
     <OpacityAnimation delay={0.1}>
       <Header doesListExists={doesListExists} apiFetched={!hasError}>
@@ -44,11 +45,11 @@ export default function ListHeader({
 
           </>
         )}
-        <div className="actionButtons">
-          <Link to='/interviews/new?active=Interviews'>
-            Nova Entrevista
-          </Link>
-        </div>
+          <div className="actionButtons">
+            <Link to='/interviews/new?active=Interviews'>
+              Nova Entrevista
+            </Link>
+          </div>
       </Header>
     </OpacityAnimation>
   );

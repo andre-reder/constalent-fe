@@ -10,19 +10,18 @@ import userCircle from '../../assets/images/icons/userCircle.svg';
 import users from '../../assets/images/icons/users.svg';
 import { useAppContext } from '../../contexts/auth';
 
-import { Container, EndingElements, LogoText, NavItem, NavItemsContainer } from './styles';
+import { Container, EndingElements, NavItem, NavItemsContainer } from './styles';
 
 interface SidebarProps {
   active?: string | null;
 }
 
 export function Sidebar({ active }: SidebarProps) {
-  const { signOut } = useAppContext();
+  const { signOut, user } = useAppContext();
+  const isCustomer = user?.role === 'customer';
   return (
     <Container>
-      <LogoText>
         <img src={logo} alt="" className='logo' />
-      </LogoText>
 
       <NavItemsContainer>
         <Link to='/?active=Home'>
@@ -85,15 +84,17 @@ export function Sidebar({ active }: SidebarProps) {
           </NavItem>
         </Link>
 
-        <Link to='/companies?active=Companies'>
-          <NavItem active={active === 'Companies'}>
-            <img src={company} alt="" />
-            <span>Empresas</span>
-            {active === 'Companies' && (
-              <strong>__</strong>
-            )}
-          </NavItem>
-        </Link>
+        {!isCustomer && (
+          <Link to='/companies?active=Companies'>
+            <NavItem active={active === 'Companies'}>
+              <img src={company} alt="" />
+              <span>Empresas</span>
+              {active === 'Companies' && (
+                <strong>__</strong>
+              )}
+            </NavItem>
+          </Link>
+        )}
       </NavItemsContainer>
 
       <EndingElements>
