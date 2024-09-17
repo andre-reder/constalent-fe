@@ -1,7 +1,5 @@
-import { DateTimeFormatOptions } from 'intl';
-
 export default function getCurrentDateWithHyphen() {
-  const options: DateTimeFormatOptions = {
+  const options: Intl.DateTimeFormatOptions = {
     day: '2-digit',
     month: '2-digit',
     year: 'numeric',

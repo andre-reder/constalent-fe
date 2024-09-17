@@ -100,7 +100,7 @@ const Tooltip = styled.div`
 
 const CustomButton: React.FC<ButtonInterface> = ({ tooltip, tooltipExplanation, width, ...props }) => {
   const [showTooltip, setShowTooltip] = useState(false);
-  const timeoutRef = useRef<number | null>(null);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const handleMouseEnter = () => {
 

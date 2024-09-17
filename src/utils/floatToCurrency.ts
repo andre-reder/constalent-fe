@@ -6,7 +6,7 @@ export default function floatToCurrency(value: number | string | undefined): str
     return value;
   }
 
-  const options = {
+  const options: Intl.NumberFormatOptions = {
     style: 'currency',
     currency: 'BRL',
   };
