@@ -12,7 +12,7 @@ export type LevelType = 'youngApprentice' |
   'manager' |
   'director' |
   'notApplicable';
-export type GenderType = 'male' | 'female' | '';
+export type GenderType = 'male' | 'female' | 'indistinct';
 export type EducationLevelType = 'fundamental' | 'medium' | 'superior' | 'postGraduation' | 'master' | 'doctorate'
 export type StatusType = 'waiting' | 'open' | 'canceled' | 'finished'
 

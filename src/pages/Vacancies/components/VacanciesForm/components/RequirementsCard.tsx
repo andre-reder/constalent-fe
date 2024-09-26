@@ -137,7 +137,7 @@ export default function RequirementsCard({
         <FormGroup aside>
           <label htmlFor="login">Gênero</label>
           <FilterRadioButtonsContainer>
-            <FilterRadioButton onClick={() => handleGenderChange('')} selected={gender === ''}>
+            <FilterRadioButton onClick={() => handleGenderChange('indistinct')} selected={gender === 'indistinct'}>
               Indiferente
             </FilterRadioButton>
             <FilterRadioButton onClick={() => handleGenderChange('male')} selected={gender === 'male'}>
