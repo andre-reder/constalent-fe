@@ -35,6 +35,8 @@ export default function InterviewsForm({ isEdit }: { isEdit: boolean }) {
     updateInterview,
     finalSalary,
     handleFinalSalaryChange,
+    setHired,
+    hired,
   } = useInterviewsForm({ isEdit });
 
   return (
@@ -77,6 +79,8 @@ export default function InterviewsForm({ isEdit }: { isEdit: boolean }) {
               type={type}
               finalSalary={finalSalary}
               handleFinalSalaryChange={handleFinalSalaryChange}
+              setHired={setHired}
+              hired={hired}
             />
           </Col>
         </Row>

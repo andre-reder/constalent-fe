@@ -8,6 +8,7 @@ interface IApplicationsService {
   id?: string;
   applicationId?: string;
   candidateId?: string;
+  vacancyId?: string;
 }
 
 class ApplicationsService {
@@ -51,6 +52,17 @@ class ApplicationsService {
   }: IApplicationsService) => {
     return this.httpClient.get({
       path: `/applications/${id}`,
+      token,
+    });
+  }
+
+  getApplicationByVacancyCandidate = async ({
+    token,
+    vacancyId,
+    candidateId,
+  }: IApplicationsService) => {
+    return this.httpClient.get({
+      path: `/applications/candidateVacancy?vacancyId=${vacancyId}&candidateId=${candidateId}`,
       token,
     });
   }

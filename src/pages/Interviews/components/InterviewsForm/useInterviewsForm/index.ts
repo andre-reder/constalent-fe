@@ -4,10 +4,12 @@ import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAppContext } from "../../../../../contexts/auth";
 import useApiCall from "../../../../../hooks/useApiCall";
+import applicationsService from "../../../../../services/applicationsService";
 import candidatesService from "../../../../../services/candidatesService";
 import companiesService from "../../../../../services/companiesService";
 import interviewsService from "../../../../../services/interviewsService";
 import vacanciesService from "../../../../../services/vacanciesService";
+import floatToCurrency from "../../../../../utils/floatToCurrency";
 import formatCurrency from "../../../../../utils/formatCurrency";
 import parseCurrencyStringToFloat from "../../../../../utils/parseCurrencyStringToFloat";
 import { InterviewStatusType, InterviewType, InterviewTypeType, OptionType } from "../../../types";
@@ -28,6 +30,7 @@ export default function useInterviewsForm({ isEdit }: { isEdit: boolean }) {
   const [aiSummary, setAiSummary] = useState<string>('');
   const [status, setStatus] = useState<InterviewStatusType>('scheduled');
   const [finalSalary, setFinalSalary] = useState<string>('');
+  const [hired, setHired] = useState<boolean>(false);
 
   const { apiCall } = useApiCall();
   const navigate = useNavigate();
@@ -129,6 +132,30 @@ export default function useInterviewsForm({ isEdit }: { isEdit: boolean }) {
     setCandidate(opt);
   }, []);
 
+  const getApplicationInfo = useCallback(async () => {
+    if (!candidate.value || !vacancy.value) return;
+
+    await apiCall({
+      apiToCall: applicationsService.getApplicationByVacancyCandidate,
+      queryParams: { vacancyId: vacancy.value, candidateId: candidate.value },
+      onStartLoad: () => setIsLoading(true),
+      onEndLoad: () => setIsLoading(false),
+      actionAfterResponse: (response: { success: boolean, application: { finalSalary: number, status: string } }) => {
+        if (!response.application) {
+          return;
+        }
+
+        if (response.application.finalSalary) {
+          setFinalSalary(floatToCurrency(response.application.finalSalary) || '');
+        }
+      }
+    });
+  }, [apiCall, candidate.value, vacancy.value]);
+
+  useEffect(() => {
+    getApplicationInfo();
+  }, [getApplicationInfo]);
+
   function handleDateChange(e: ChangeEvent<HTMLInputElement>) {
     setDate(e.target.value);
   }
@@ -159,6 +186,7 @@ export default function useInterviewsForm({ isEdit }: { isEdit: boolean }) {
         details,
         aiSummary,
         finalSalary: finalSalary ? parseCurrencyStringToFloat(finalSalary) : null,
+        hired: type === 'company' ? hired : false,
       }),
       onStartLoad: () => setIsLoading(true),
       onEndLoad: () => setIsLoading(false),
@@ -179,7 +207,7 @@ export default function useInterviewsForm({ isEdit }: { isEdit: boolean }) {
         setCandidateOptions([]);
       },
     })
-  }, [aiSummary, apiCall, candidate.value, date, details, finalSalary, isCustomer, status, type, vacancy.value]);
+  }, [aiSummary, apiCall, candidate.value, date, details, finalSalary, hired, isCustomer, status, type, vacancy.value]);
 
   const updateInterview = useCallback(async () => {
     await apiCall({
@@ -194,6 +222,7 @@ export default function useInterviewsForm({ isEdit }: { isEdit: boolean }) {
         details,
         aiSummary,
         finalSalary: finalSalary ? parseCurrencyStringToFloat(finalSalary) : null,
+        hired: type === 'company' ? hired : false,
       }),
       onStartLoad: () => setIsLoading(true),
       onEndLoad: () => setIsLoading(false),
@@ -206,7 +235,7 @@ export default function useInterviewsForm({ isEdit }: { isEdit: boolean }) {
         navigate('/interviews?active=Interviews');
       },
     })
-  }, [aiSummary, apiCall, candidate.value, date, details, finalSalary, id, isCustomer, navigate, status, type, vacancy.value]);
+  }, [aiSummary, apiCall, candidate.value, date, details, finalSalary, hired, id, isCustomer, navigate, status, type, vacancy.value]);
 
   const isFormValid = useMemo(() => (
     company.value && vacancy.value && candidate.value && date && type && status
@@ -244,5 +273,7 @@ export default function useInterviewsForm({ isEdit }: { isEdit: boolean }) {
     updateInterview,
     finalSalary,
     handleFinalSalaryChange,
+    setHired,
+    hired,
   };
 }

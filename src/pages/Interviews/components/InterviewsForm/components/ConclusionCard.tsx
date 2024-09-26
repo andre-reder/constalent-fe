@@ -17,6 +17,8 @@ interface IConclusionCard {
   type: InterviewTypeType;
   finalSalary: string;
   handleFinalSalaryChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  setHired: Dispatch<SetStateAction<boolean>>;
+  hired: boolean;
 }
 
 export default function ConclusionCard({
@@ -29,6 +31,8 @@ export default function ConclusionCard({
   type,
   finalSalary,
   handleFinalSalaryChange,
+  setHired,
+  hired,
 }: IConclusionCard) {
   return (
     <StyledContainer>
@@ -76,14 +80,25 @@ export default function ConclusionCard({
       </FormGroup>
 
     {(status === 'approved' && type === 'company') && (
-      <FormGroup>
-        <label htmlFor="">Salário Final Acordado</label>
-        <Input
-          value={finalSalary}
-          onChange={handleFinalSalaryChange}
-          placeholder='R$ XX.XXX,XX'
-        />
-      </FormGroup>
+      <>
+        <FormGroup marginTop={16}>
+          <label htmlFor="">Processo seletivo finalizado com aprovação? (finalizadas todas as etapas do processo e confirmado que o mesmo será contratado)</label>
+          <FilterRadioButton onClick={() => setHired(true)} selected={hired}>
+            Sim
+          </FilterRadioButton>
+          <FilterRadioButton onClick={() => setHired(false)} selected={!hired}>
+            Não
+          </FilterRadioButton>
+        </FormGroup>
+        <FormGroup marginTop={16}>
+          <label htmlFor="">Salário Final Acordado</label>
+          <Input
+            value={finalSalary}
+            onChange={handleFinalSalaryChange}
+            placeholder='R$ XX.XXX,XX'
+          />
+        </FormGroup>
+      </>
     )}
     </StyledContainer>
   );
