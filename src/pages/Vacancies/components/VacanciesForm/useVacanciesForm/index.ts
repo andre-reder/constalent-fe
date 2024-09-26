@@ -45,7 +45,7 @@ export default function useVacancyForm({ isEdit }: IUseVacancyForm) {
   const [needsExtraHours, setNeedsExtraHours] = useState(false);
   const [minAge, setMinAge] = useState<number | string>('');
   const [maxAge, setMaxAge] = useState<number | string>('');
-  const [gender, setGender] = useState<GenderType>('');
+  const [gender, setGender] = useState<GenderType>('indistinct');
   const [educationLevel, setEducationLevel] = useState({} as OptionType);
   const [benefits, setBenefits] = useState([] as MultiValue<OptionType>);
   const [otherBenefits, setOtherBenefits] = useState('');
@@ -493,7 +493,7 @@ export default function useVacancyForm({ isEdit }: IUseVacancyForm) {
         setNeedsExtraHours(false);
         setMinAge('');
         setMaxAge('');
-        setGender('');
+        setGender('indistinct');
         setEducationLevel({} as OptionType);
         setBenefits([]);
         setOtherBenefits('');
