@@ -8,6 +8,7 @@ import { AsideContainer, Container as StyledContainer } from '../../../../../com
 import FormGroup from '../../../../../components/FormGroup';
 import Input from '../../../../../components/Input';
 import Textarea from '../../../../../components/Textarea';
+import { useAppContext } from '../../../../../contexts/auth';
 import useThemeContext from '../../../../../contexts/theme';
 import { GetErrorMessageByFieldNameType } from '../../../../../hooks/useErrors';
 import { OptionType } from '../../../types';
@@ -80,6 +81,8 @@ export default function GeneralDataCard({
   handleReasonForOpeningChange,
 }: IGeneralDataCard) {
   const { selectedTheme } = useThemeContext();
+  const { user } = useAppContext();
+  const isCustomer = user?.role === 'customer';
 
   return (
     <StyledContainer>
@@ -95,7 +98,7 @@ export default function GeneralDataCard({
             onChange={handleTitleChange}
             autoComplete="new-password"
             error={getErrorMessageByFieldName('title')}
-            disabled={isEdit}
+            disabled={isEdit && isCustomer}
           />
         </FormGroup>
 

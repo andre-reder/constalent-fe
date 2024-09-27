@@ -176,7 +176,7 @@ export default function RequirementsCard({
         </FormGroup>
 
         <FormGroup aside>
-          <label htmlFor="login">Haverá teste para comprovar habilidade?</label>
+          <label htmlFor="login">Haverá teste para comprovar habilidade? (responsabilidade cliente)</label>
           <FilterRadioButtonsContainer>
             <FilterRadioButton onClick={() => handleWillApplicantBeTestedChange(false)} selected={!willApplicantBeTested}>
               Não

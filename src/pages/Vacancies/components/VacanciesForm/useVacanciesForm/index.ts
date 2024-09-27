@@ -93,13 +93,16 @@ export default function useVacancyForm({ isEdit }: IUseVacancyForm) {
   ]), []);
 
   const levelOptions = useMemo(() => ([
+    { value: '', label: 'Todos' },
     { value: 'youngApprentice', label: 'Jovem Aprendiz' },
     { value: 'internship', label: 'Estágio' },
     { value: 'trainee', label: 'Trainee' },
+    { value: 'auxiliary', label: 'Auxiliar' },
     { value: 'assistant', label: 'Assistente' },
     { value: 'junior', label: 'Júnior' },
     { value: 'pleno', label: 'Pleno' },
     { value: 'senior', label: 'Sênior' },
+    { value: 'supervisor', label: 'Supervisor' },
     { value: 'coordinator', label: 'Coordenador' },
     { value: 'manager', label: 'Gerente' },
     { value: 'director', label: 'Diretor' },
