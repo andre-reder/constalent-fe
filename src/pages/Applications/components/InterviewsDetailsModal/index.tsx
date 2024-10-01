@@ -91,7 +91,7 @@ export default function InterviewsDetailsModal({
             <InterviewContainer>
               <div className="group">
                 <strong>Status</strong>
-                <span>{specificInterview?.status}</span>
+                <span>{interviewStatusLiterals[specificInterview?.status]}</span>
               </div>
 
               <div className="group">
