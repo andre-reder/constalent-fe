@@ -20,9 +20,10 @@ export default function InterviewsDetailsModal({
   setInterviewDetailsModalShow,
 }: IInterviewsDetailsModal) {
   const [interviewBeingViewed, setInterviewBeingViewed] = useState<'recruiter' | 'company'>('recruiter');
+  const [specificInterview, setSpecificInterview] = useState<InterviewDetailsType | null>(null);
 
   const recruiterInterview = interviewsDetails?.find(interview => interview.type === 'recruiter');
-  const companyInterview = interviewsDetails?.find(interview => interview.type === 'company');
+  const companyInterviews = interviewsDetails?.filter(interview => interview.type === 'company');
 
   const interviewStatusLiterals: { [key: string]: string } = {
     'scheduled': 'Agendada',
@@ -44,10 +45,21 @@ export default function InterviewsDetailsModal({
                 Recrutador
               </FilterRadioButton>
             )}
-            {companyInterview && (
-              <FilterRadioButton onClick={() => setInterviewBeingViewed('company')} selected={interviewBeingViewed === 'company'}>
-                Empresa
-              </FilterRadioButton>
+            {companyInterviews && companyInterviews.length > 0 && (
+              <>
+                {companyInterviews.map((companyInterview, index) => (
+                  <FilterRadioButton
+                    key={companyInterview.id}
+                    onClick={() => {
+                      setInterviewBeingViewed('company');
+                      setSpecificInterview(companyInterview);
+                    }}
+                    selected={interviewBeingViewed === 'company' && specificInterview?.id === companyInterview.id}
+                  >
+                    Empresa #{index}
+                  </FilterRadioButton>
+                ))}
+              </>
             )}
           </FilterRadioButtonsContainer>
 
@@ -75,26 +87,26 @@ export default function InterviewsDetailsModal({
             </InterviewContainer>
           )}
 
-          {(interviewBeingViewed === 'company' && companyInterview) && (
+          {(interviewBeingViewed === 'company' && companyInterviews && companyInterviews.length > 0 && specificInterview) && (
             <InterviewContainer>
               <div className="group">
                 <strong>Status</strong>
-                <span>{companyInterview?.status}</span>
+                <span>{specificInterview?.status}</span>
               </div>
 
               <div className="group">
                 <strong>Data</strong>
-                <span>{format(new Date(companyInterview?.date), 'dd/MM/yyyy\' ás \'HH:mm')}</span>
+                <span>{format(new Date(specificInterview?.date), 'dd/MM/yyyy\' ás \'HH:mm')}</span>
               </div>
 
               <div className="group">
                 <strong>Relatório / Detalhes</strong>
-                <span>{companyInterview?.details || 'Não informado'}</span>
+                <span>{specificInterview?.details || 'Não informado'}</span>
               </div>
 
               <div className="group">
                 <strong>Resumo IA</strong>
-                <span>{companyInterview?.aiSummary || 'Não informado'}</span>
+                <span>{specificInterview?.aiSummary || 'Não informado'}</span>
               </div>
             </InterviewContainer>
           )}
