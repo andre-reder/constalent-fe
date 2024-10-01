@@ -56,7 +56,7 @@ export default function InterviewsDetailsModal({
                     }}
                     selected={interviewBeingViewed === 'company' && specificInterview?.id === companyInterview.id}
                   >
-                    Empresa #{index}
+                    #{index + 1} Empresa
                   </FilterRadioButton>
                 ))}
               </>
