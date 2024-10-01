@@ -22,6 +22,7 @@ export type CandidateType = {
   rg: string;
   cep?: string;
   streetNumber?: string;
+  complement?: string;
   streetName?: string;
   district?: string;
   city?: string;

@@ -46,6 +46,8 @@ export default function CandidateForm({ isEdit = false }: ICandidateForm) {
     streetName,
     streetNumber,
     handleStreetNumberChange,
+    complement,
+    handleComplementChange,
     district,
     city,
     uf,
@@ -128,6 +130,8 @@ export default function CandidateForm({ isEdit = false }: ICandidateForm) {
               district={district}
               city={city}
               uf={uf}
+              complement={complement}
+              handleComplementChange={handleComplementChange}
               getErrorMessageByFieldName={getErrorMessageByFieldName}
               isGettingCepInfo={isGettingCepInfo}
             />

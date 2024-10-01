@@ -55,6 +55,7 @@ export default function useCandidateForm({ isEdit }: { isEdit: boolean}) {
   const [cep, setCep] = useState('');
   const [streetName, setStreetName] = useState('');
   const [streetNumber, setStreetNumber] = useState<number | string>('');
+  const [complement, setComplement] = useState('');
   const [district, setDistrict] = useState('');
   const [city, setCity] = useState('');
   const [uf, setUf] = useState('');
@@ -302,6 +303,7 @@ export default function useCandidateForm({ isEdit }: { isEdit: boolean}) {
         setCep(candidate.cep ?? '');
         setStreetName(candidate.streetName ?? '');
         setStreetNumber(candidate.streetNumber ?? '');
+        setComplement(candidate.complement ?? '');
         setDistrict(candidate.district ?? '');
         setCity(candidate.city ?? '');
         setUf(candidate.uf ?? '');
@@ -342,6 +344,7 @@ export default function useCandidateForm({ isEdit }: { isEdit: boolean}) {
         { key: 'cep', value: cep },
         { key: 'streetName', value: streetName },
         { key: 'streetNumber', value: streetNumber },
+        { key: 'complement', value: complement },
         { key: 'district', value: district },
         { key: 'city', value: city },
         { key: 'uf', value: uf },
@@ -401,7 +404,7 @@ export default function useCandidateForm({ isEdit }: { isEdit: boolean}) {
         setEducationLevel({} as OptionType);
       },
     })
-  }, [apiCall, birthDate, candidateName, candidatesForm, cep, childrenAmount, city, cpf, district, educationLevel.value, email, gender, graduationCourse, lastCompany, lastPosition, lastSalary, linkedin, maritalStatus.value, phone, psycologicalTest, resume, rg, salaryExpected, streetName, streetNumber, uf]);
+  }, [apiCall, birthDate, candidateName, candidatesForm, cep, childrenAmount, city, complement, cpf, district, educationLevel.value, email, gender, graduationCourse, lastCompany, lastPosition, lastSalary, linkedin, maritalStatus.value, phone, psycologicalTest, resume, rg, salaryExpected, streetName, streetNumber, uf]);
 
   const updateCandidate = useCallback(async () => {
     await apiCall({
@@ -414,6 +417,7 @@ export default function useCandidateForm({ isEdit }: { isEdit: boolean}) {
         { key: 'cep', value: cep },
         { key: 'streetName', value: streetName },
         { key: 'streetNumber', value: streetNumber },
+        { key: 'complement', value: complement },
         { key: 'district', value: district },
         { key: 'city', value: city },
         { key: 'uf', value: uf },
@@ -445,7 +449,7 @@ export default function useCandidateForm({ isEdit }: { isEdit: boolean}) {
         navigate('/candidates?active=Candidates');
       },
     })
-  }, [apiCall, candidateBeingEditted.id, candidateName, phone, email, cep, streetName, streetNumber, district, city, uf, cpf, rg, birthDate, gender, maritalStatus.value, childrenAmount, linkedin, salaryExpected, lastSalary, lastCompany, lastPosition, resume, psycologicalTest, candidatesForm, educationLevel.value, graduationCourse, navigate]);
+  }, [apiCall, candidateBeingEditted.id, candidateName, phone, email, cep, streetName, streetNumber, complement, district, city, uf, cpf, rg, birthDate, gender, maritalStatus.value, childrenAmount, linkedin, salaryExpected, lastSalary, lastCompany, lastPosition, resume, psycologicalTest, candidatesForm, educationLevel.value, graduationCourse, navigate]);
 
   const handleCepChange = useCallback(async (event: ChangeEvent<HTMLInputElement>) => {
     try {
@@ -485,6 +489,10 @@ export default function useCandidateForm({ isEdit }: { isEdit: boolean}) {
       setIsGettingCepInfo(false);
     }
   }, [removeError, setError]);
+
+  const handleComplementChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
+    setComplement(event.target.value);
+  }, []);
 
   const isFormValid = useMemo(() => (
     !!candidateName &&
@@ -537,6 +545,8 @@ export default function useCandidateForm({ isEdit }: { isEdit: boolean}) {
     streetName,
     streetNumber,
     handleStreetNumberChange,
+    complement,
+    handleComplementChange,
     district,
     city,
     uf,

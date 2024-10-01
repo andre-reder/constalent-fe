@@ -13,6 +13,8 @@ interface AddressDataCardInterface {
   district: string;
   city: string;
   uf: string;
+  complement: string;
+  handleComplementChange: (event: ChangeEvent<HTMLInputElement>) => void;
   getErrorMessageByFieldName: GetErrorMessageByFieldNameType;
   isGettingCepInfo: boolean;
 }
@@ -26,6 +28,8 @@ export default function AddressDataCard({
   district,
   city,
   uf,
+  complement,
+  handleComplementChange,
   getErrorMessageByFieldName,
   isGettingCepInfo,
 }: AddressDataCardInterface) {
@@ -54,6 +58,15 @@ export default function AddressDataCard({
             onChange={handleStreetNumberChange}
             error={getErrorMessageByFieldName('number')}
             placeholder="Informe o número do endereço"
+          />
+        </FormGroup>
+
+        <FormGroup>
+          <label htmlFor="">Complemento</label>
+          <Input
+            value={complement}
+            onChange={handleComplementChange}
+            placeholder="Informe o complemento"
           />
         </FormGroup>
       </AsideContainer>
