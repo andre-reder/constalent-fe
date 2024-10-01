@@ -1,14 +1,14 @@
 export default function isRgValid(rg: string) {
-  // Remove todos os caracteres que não são dígitos
-  rg = rg.replace(/\D/g, '');
+  // Remove todos os caracteres que não são dígitos ou a letra "X"
+  rg = rg.toUpperCase().replace(/[^\dX]/g, '');
 
-  // Verifica se o RG tem exatamente 9 dígitos
-  if (rg.length !== 9) {
+  // Verifica se o RG tem exatamente 9 caracteres, sendo o último um dígito ou a letra "X"
+  if (rg.length !== 9 || (rg[8] !== 'X' && !/\d/.test(rg[8]))) {
     return false;
   }
 
-  // Verifica se todos os caracteres são iguais (ex: "111111111" não é um RG válido)
-  if (/^(\d)\1+$/.test(rg)) {
+  // Verifica se todos os caracteres (exceto o último) são iguais
+  if (/^(\d)\1{7}$/.test(rg.slice(0, 8))) {
     return false;
   }
 
