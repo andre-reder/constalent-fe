@@ -39,6 +39,9 @@ export default function ChangeStatusModal({
             <FilterRadioButton onClick={() => setNewStatus('notContinued')} selected={newStatus === 'notContinued'}>
               Não Continuada
             </FilterRadioButton>
+            <FilterRadioButton onClick={() => setNewStatus('standby')} selected={newStatus === 'standby'}>
+              Stand-By
+            </FilterRadioButton>
             {!isCustomer && (
               <>
                 <FilterRadioButton onClick={() => setNewStatus('rejectedByRecruiter')} selected={newStatus === 'rejectedByRecruiter'}>

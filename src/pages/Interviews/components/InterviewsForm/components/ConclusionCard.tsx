@@ -67,6 +67,9 @@ export default function ConclusionCard({
           <FilterRadioButton onClick={() => setStatus('scheduled')} selected={status === 'scheduled'}>
             Agendado
           </FilterRadioButton>
+          <FilterRadioButton onClick={() => setStatus('standby')} selected={status === 'standby'}>
+            Stand-By
+          </FilterRadioButton>
           <FilterRadioButton onClick={() => setStatus('approved')} selected={status === 'approved'}>
             Aprovado
           </FilterRadioButton>

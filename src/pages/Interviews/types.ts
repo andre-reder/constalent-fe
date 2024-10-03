@@ -1,6 +1,6 @@
 export type OptionType = { value: string, label: string, companyId?: string }
 export type InterviewTypeType = 'recruiter' | 'company';
-export type InterviewStatusType = 'scheduled' | 'canceled' | 'approved' | 'rejected';
+export type InterviewStatusType = 'scheduled' | 'canceled' | 'approved' | 'rejected' | 'standby';
 
 export type InterviewType = {
   id: string;

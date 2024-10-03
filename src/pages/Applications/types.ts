@@ -5,7 +5,8 @@ export type ApplicationStatus =
  'rejectedByRecruiter' |
  'approvedByRecruiter' |
  'rejectedByCompany' |
- 'approvedByCompany'
+ 'approvedByCompany' |
+ 'standby'
 
 export type OptionType = { value: string, label: string }
 
@@ -45,4 +46,5 @@ export type CandidatesDocsType = {
   resume: string;
   psycologicalTest?: string;
   candidatesForm?: string;
+  portfolio?: string;
 }

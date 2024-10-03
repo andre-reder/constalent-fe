@@ -20,7 +20,7 @@ export default function CandidatesDocsModal({
   const downloadResumeRef = useRef<HTMLAnchorElement | null>(null);
   const downloadCandidatesFormRef = useRef<HTMLAnchorElement | null>(null);
   const downloadPsycologicalTestRef = useRef<HTMLAnchorElement | null>(null);
-
+  const downloadPortfolioRef = useRef<HTMLAnchorElement | null>(null);
 
   return (
     <MyModal
@@ -66,6 +66,21 @@ export default function CandidatesDocsModal({
             />
             <SecondaryButton onClick={() => { downloadPsycologicalTestRef.current!.click();}}>
               ⬇️ Teste Psicológico
+            </SecondaryButton>
+          </>
+        )}
+
+        {candidatesDocs.portfolio && (
+          <>
+            <Link
+              to={candidatesDocs.portfolio}
+              target="_blank"
+              download
+              style={{ display: 'none' }}
+              ref={downloadPortfolioRef}
+            />
+            <SecondaryButton onClick={() => { downloadPortfolioRef.current!.click();}}>
+              ⬇️ Portifólio
             </SecondaryButton>
           </>
         )}
