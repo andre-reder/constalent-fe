@@ -34,6 +34,12 @@ export type CandidateType = {
   lastPosition: string;
   status: StatusType;
   createdAt: Date;
+  isRegularWithGovernmentTax: boolean;
+  hasCriminalRecord: boolean;
+  sentenceServed: boolean;
+  courtCases: string[];
+  portfolio?: string;
+  isPortfolioFile: boolean;
 }
 
 export type GetCandidatesApiResponse = {

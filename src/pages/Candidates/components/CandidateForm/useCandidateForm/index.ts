@@ -1,6 +1,7 @@
 import { format } from "date-fns";
 import { ChangeEvent, useCallback, useEffect, useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { MultiValue } from "react-select";
 import { toast } from "react-toastify";
 import useApiCall from "../../../../../hooks/useApiCall";
 import useErrors from "../../../../../hooks/useErrors";
@@ -47,10 +48,11 @@ export default function useCandidateForm({ isEdit }: { isEdit: boolean}) {
   const [resume, setResume] = useState<File | string | undefined>();
   const [psycologicalTest, setPsycologicalTest] = useState<File | string | undefined>();
   const [candidatesForm, setCandidatesForm] = useState<File | string | undefined>();
+  const [portfolio, setPortfolio] = useState<File | string | undefined>();
   const [resumeFileName, setResumeFileName] = useState('');
   const [psycologicalTestFileName, setPsycologicalTestFileName] = useState('');
   const [candidatesFormFileName, setCandidatesFormFileName] = useState('');
-
+  const [portfolioFileName, setPortfolioFileName] = useState('');
 
   const [cep, setCep] = useState('');
   const [streetName, setStreetName] = useState('');
@@ -60,6 +62,12 @@ export default function useCandidateForm({ isEdit }: { isEdit: boolean}) {
   const [city, setCity] = useState('');
   const [uf, setUf] = useState('');
   const [isGettingCepInfo, setIsGettingCepInfo] = useState(false);
+
+  const [courtCases, setCourtCases] = useState([] as MultiValue<OptionType>);
+  const [isRegularWithGovernmentTax, setIsRegularWithGovernmentTax] = useState(true);
+  const [hasCriminalRecord, setHasCriminalRecord] = useState(false);
+  const [sentenceServed, setSentenceServed] = useState(true);
+  const [isPortfolioFile, setIsPortfolioFile] = useState(false);
 
   const maritalStatusOptions: OptionType[] = useMemo(() => [
     { value: 'single', label: 'Solteiro(a)' },
@@ -97,6 +105,13 @@ export default function useCandidateForm({ isEdit }: { isEdit: boolean}) {
       doctorate: 'Doutorado',
     }
   ), []);
+
+  const courtCasesOptions: OptionType[] = useMemo(() => ([
+    { value: 'trt', label: 'Trabalhista' },
+    { value: 'criminal', label: 'Criminal' },
+    { value: 'civil', label: 'Cívil' },
+    { value: 'others', label: 'Outros' },
+  ]), []);
 
   const { apiCall } = useApiCall();
   const navigate = useNavigate();
@@ -229,6 +244,14 @@ export default function useCandidateForm({ isEdit }: { isEdit: boolean}) {
     }
   }
 
+  function handlePortfolioChange(event: ChangeEvent<HTMLInputElement>) {
+    setPortfolio(event.target.value);
+  }
+
+  function handleCourtCasesChange(e: MultiValue<OptionType>) {
+    setCourtCases(e);
+  }
+
   const handleResumeUpload = useCallback((event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
       setResume(event.target.files[0]);
@@ -265,6 +288,20 @@ export default function useCandidateForm({ isEdit }: { isEdit: boolean}) {
     setCandidatesFormFileName('');
   }, []);
 
+  const handlePortfolioUpload = useCallback((event: ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files) {
+      setPortfolio(event.target.files[0]);
+      setPortfolioFileName(event.target.files[0].name);
+      setIsPortfolioFile(true);
+    }
+  }, []);
+
+  const handleRemovePortfolio = useCallback(() => {
+    setPortfolio(undefined);
+    setPortfolioFileName('');
+    setIsPortfolioFile(false);
+  }, []);
+
   const downloadResume = useCallback(() => {
     if (resume) {
       downloadFile(resume, resumeFileName ?? `Curriculo - ${candidateName}`);
@@ -283,6 +320,12 @@ export default function useCandidateForm({ isEdit }: { isEdit: boolean}) {
     }
   }, [candidateName, candidatesForm, candidatesFormFileName]);
 
+  const downloadPortfolio = useCallback(() => {
+    if (portfolio && isPortfolioFile) {
+      downloadFile(portfolio, portfolioFileName ?? `Portifólio do candidato - ${candidateName}`);
+    }
+  }, [candidateName, isPortfolioFile, portfolio, portfolioFileName]);
+
   const getCandidate = useCallback(async () => {
     await apiCall({
       apiToCall: candidatesService.getCandidate,
@@ -295,6 +338,9 @@ export default function useCandidateForm({ isEdit }: { isEdit: boolean}) {
         }
 
         const { candidate } = response;
+
+        const correspondingCourtCases = courtCasesOptions.filter((opt) => candidate.courtCases.includes(opt.value));
+        setCourtCases(correspondingCourtCases);
 
         setCandidateBeingEditted(candidate);
         setEmail(candidate.email);
@@ -323,16 +369,23 @@ export default function useCandidateForm({ isEdit }: { isEdit: boolean}) {
         setResume(candidate.resume ?? '');
         setPsycologicalTest(candidate.psycologicalTest ?? '');
         setCandidatesForm(candidate.candidatesForm ?? '');
+        setCandidatesForm(candidate.candidatesForm ?? '');
         setResumeFileName(candidate.resume ?? '');
         setPsycologicalTestFileName(candidate.psycologicalTest ?? '');
         setCandidatesFormFileName(candidate.candidatesForm ?? '');
         setGraduationCourse(candidate.graduationCourse ?? '');
         setEducationLevel({ value: candidate.educationLevel, label: educationLevelLiterals[candidate.educationLevel] });
+
+        setPortfolioFileName(candidate.portfolio ?? '')
+        setIsRegularWithGovernmentTax(!!candidate.isRegularWithGovernmentTax)
+        setHasCriminalRecord(!!candidate.hasCriminalRecord)
+        setSentenceServed(!!candidate.sentenceServed)
+        setIsPortfolioFile(!!candidate.isPortfolioFile)
       },
       onStartLoad: () => setIsLoading(true),
       onEndLoad: () => setIsLoading(false),
     })
-  }, [apiCall, educationLevelLiterals, id, maritalStatusLiterals, navigate]);
+  }, [apiCall, courtCasesOptions, educationLevelLiterals, id, maritalStatusLiterals, navigate]);
 
   const addCandidate = useCallback(async () => {
     await apiCall({
@@ -365,6 +418,12 @@ export default function useCandidateForm({ isEdit }: { isEdit: boolean}) {
         { key: 'status', value: 'stored' },
         { key: 'educationLevel', value: educationLevel.value },
         { key: 'graduationCourse', value: graduationCourse },
+        { key: 'isRegularWithGovernmentTax', value: isRegularWithGovernmentTax },
+        { key: 'hasCriminalRecord', value: hasCriminalRecord },
+        { key: 'sentenceServed', value: sentenceServed },
+        { key: 'courtCases', value: JSON.stringify(courtCases.map((opt) => opt.value)) },
+        { key: 'portfolio', value: portfolio },
+        { key: 'isPortfolioFile', value: isPortfolioFile },
       ],
       onStartLoad: () => setIsLoading(true),
       onEndLoad: () => setIsLoading(false),
@@ -404,7 +463,7 @@ export default function useCandidateForm({ isEdit }: { isEdit: boolean}) {
         setEducationLevel({} as OptionType);
       },
     })
-  }, [apiCall, birthDate, candidateName, candidatesForm, cep, childrenAmount, city, complement, cpf, district, educationLevel.value, email, gender, graduationCourse, lastCompany, lastPosition, lastSalary, linkedin, maritalStatus.value, phone, psycologicalTest, resume, rg, salaryExpected, streetName, streetNumber, uf]);
+  }, [apiCall, birthDate, candidateName, candidatesForm, cep, childrenAmount, city, complement, courtCases, cpf, district, educationLevel.value, email, gender, graduationCourse, hasCriminalRecord, isPortfolioFile, isRegularWithGovernmentTax, lastCompany, lastPosition, lastSalary, linkedin, maritalStatus.value, phone, portfolio, psycologicalTest, resume, rg, salaryExpected, sentenceServed, streetName, streetNumber, uf]);
 
   const updateCandidate = useCallback(async () => {
     await apiCall({
@@ -437,6 +496,12 @@ export default function useCandidateForm({ isEdit }: { isEdit: boolean}) {
         { key: 'candidatesForm', value: candidatesForm },
         { key: 'educationLevel', value: educationLevel.value },
         { key: 'graduationCourse', value: graduationCourse },
+        { key: 'isRegularWithGovernmentTax', value: isRegularWithGovernmentTax },
+        { key: 'hasCriminalRecord', value: hasCriminalRecord },
+        { key: 'sentenceServed', value: sentenceServed },
+        { key: 'courtCases', value: JSON.stringify(courtCases.map((opt) => opt.value)) },
+        { key: 'portfolio', value: portfolio },
+        { key: 'isPortfolioFile', value: isPortfolioFile },
       ],
       onStartLoad: () => setIsLoading(true),
       onEndLoad: () => setIsLoading(false),
@@ -449,7 +514,7 @@ export default function useCandidateForm({ isEdit }: { isEdit: boolean}) {
         navigate('/candidates?active=Candidates');
       },
     })
-  }, [apiCall, candidateBeingEditted.id, candidateName, phone, email, cep, streetName, streetNumber, complement, district, city, uf, cpf, rg, birthDate, gender, maritalStatus.value, childrenAmount, linkedin, salaryExpected, lastSalary, lastCompany, lastPosition, resume, psycologicalTest, candidatesForm, educationLevel.value, graduationCourse, navigate]);
+  }, [apiCall, candidateBeingEditted.id, candidateName, phone, email, cep, streetName, streetNumber, complement, district, city, uf, cpf, rg, birthDate, gender, maritalStatus.value, childrenAmount, linkedin, salaryExpected, lastSalary, lastCompany, lastPosition, resume, psycologicalTest, candidatesForm, educationLevel.value, graduationCourse, isRegularWithGovernmentTax, hasCriminalRecord, sentenceServed, courtCases, portfolio, isPortfolioFile, navigate]);
 
   const handleCepChange = useCallback(async (event: ChangeEvent<HTMLInputElement>) => {
     try {
@@ -581,5 +646,22 @@ export default function useCandidateForm({ isEdit }: { isEdit: boolean}) {
     handleGraduationCourseChange,
     graduationCourse,
     educationLevelOptions,
+    courtCases,
+    courtCasesOptions,
+    handleCourtCasesChange,
+    portfolio,
+    portfolioFileName,
+    isRegularWithGovernmentTax,
+    setIsRegularWithGovernmentTax,
+    hasCriminalRecord,
+    setHasCriminalRecord,
+    sentenceServed,
+    setSentenceServed,
+    isPortfolioFile,
+    setIsPortfolioFile,
+    handlePortfolioUpload,
+    handleRemovePortfolio,
+    downloadPortfolio,
+    handlePortfolioChange,
   };
 }

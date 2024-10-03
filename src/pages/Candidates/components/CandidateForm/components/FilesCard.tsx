@@ -6,7 +6,11 @@ import FormGroup from '../../../../../components/FormGroup';
 interface IFilesCard {
   handleResumeUpload: (event: ChangeEvent<HTMLInputElement>) => void;
   handleRemoveResume: () => void;
+  handlePortfolioUpload: (event: ChangeEvent<HTMLInputElement>) => void;
+  handleRemovePortfolio: () => void;
+  isPortfolioFile: boolean;
   resumeFileName: string;
+  portfolioFileName: string;
   handlePsycologicalTestUpload: (event: ChangeEvent<HTMLInputElement>) => void;
   removePsycologicalTest: () => void;
   psycologicalTestFileName: string;
@@ -16,6 +20,7 @@ interface IFilesCard {
   downloadResume?: () => void;
   downloadPsycologicalTest?: () => void;
   downloadCandidatesForm?: () => void;
+  downloadPortfolio?: () => void;
 }
 
 export default function FilesCard({
@@ -31,6 +36,11 @@ export default function FilesCard({
   downloadResume,
   downloadPsycologicalTest,
   downloadCandidatesForm,
+  portfolioFileName,
+  downloadPortfolio,
+  handlePortfolioUpload,
+  handleRemovePortfolio,
+  isPortfolioFile,
 }: IFilesCard) {
   return (
     <StyledContainer>
@@ -73,6 +83,20 @@ export default function FilesCard({
               downloadFile={downloadCandidatesForm}
             />
         </FormGroup>
+
+        {isPortfolioFile && (
+          <FormGroup>
+            <label htmlFor="login">Portifólio</label>
+            <FileInput
+                onFileUpload={handlePortfolioUpload}
+                fileNameChoosed={portfolioFileName}
+                acceptedFiles=".pdf, .doc, .docx, .xls, .xlsx, .csv"
+                hasSubmitAction={false}
+                removeFile={handleRemovePortfolio}
+                downloadFile={downloadPortfolio}
+              />
+          </FormGroup>
+        )}
     </StyledContainer>
   );
 }

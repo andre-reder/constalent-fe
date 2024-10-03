@@ -4,6 +4,7 @@ import { ButtonContainer } from "../../../../components/Form";
 import Loader from "../../../../components/Loader";
 import ReturnHeader from "../../../../components/ReturnHeader";
 import AddressDataCard from "./components/AddressDataCard";
+import ComplementaryDataCard from "./components/ComplementaryDataCard";
 import ContactDataCard from "./components/ContactDataCard";
 import FilesCard from "./components/FilesCard";
 import GeneralDataCard from "./components/GeneralDataCard";
@@ -79,6 +80,23 @@ export default function CandidateForm({ isEdit = false }: ICandidateForm) {
     graduationCourse,
     educationLevelOptions,
     handleEducationLevelChange,
+    portfolioFileName,
+    downloadPortfolio,
+    setIsPortfolioFile,
+    handlePortfolioUpload,
+    handleRemovePortfolio,
+    isPortfolioFile,
+    portfolio,
+    handlePortfolioChange,
+    courtCases,
+    courtCasesOptions,
+    handleCourtCasesChange,
+    isRegularWithGovernmentTax,
+    setIsRegularWithGovernmentTax,
+    hasCriminalRecord,
+    setHasCriminalRecord,
+    sentenceServed,
+    setSentenceServed,
   } = useCandidateForm({ isEdit });
 
   return (
@@ -167,6 +185,26 @@ export default function CandidateForm({ isEdit = false }: ICandidateForm) {
 
         <Row xs={1} md={1} lg={1}>
           <Col>
+            <ComplementaryDataCard
+              isPortfolioFile={isPortfolioFile}
+              portfolio={portfolio}
+              handlePortfolioChange={handlePortfolioChange}
+              courtCases={courtCases}
+              courtCasesOptions={courtCasesOptions}
+              handleCourtCasesChange={handleCourtCasesChange}
+              isRegularWithGovernmentTax={isRegularWithGovernmentTax}
+              setIsRegularWithGovernmentTax={setIsRegularWithGovernmentTax}
+              hasCriminalRecord={hasCriminalRecord}
+              setHasCriminalRecord={setHasCriminalRecord}
+              sentenceServed={sentenceServed}
+              setSentenceServed={setSentenceServed}
+              setIsPortfolioFile={setIsPortfolioFile}
+            />
+          </Col>
+        </Row>
+
+        <Row xs={1} md={1} lg={1}>
+          <Col>
             <FilesCard
               handleResumeUpload={handleResumeUpload}
               handleRemoveResume={handleRemoveResume}
@@ -180,6 +218,11 @@ export default function CandidateForm({ isEdit = false }: ICandidateForm) {
               downloadResume={downloadResume}
               downloadPsycologicalTest={downloadPsycologicalTest}
               downloadCandidatesForm={downloadCandidatesForm}
+              portfolioFileName={portfolioFileName}
+              downloadPortfolio={downloadPortfolio}
+              handlePortfolioUpload={handlePortfolioUpload}
+              handleRemovePortfolio={handleRemovePortfolio}
+              isPortfolioFile={isPortfolioFile}
             />
           </Col>
         </Row>
