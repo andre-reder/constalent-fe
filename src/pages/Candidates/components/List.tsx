@@ -6,6 +6,7 @@ import edit from '../../../assets/images/icons/edit.svg';
 import trash from '../../../assets/images/icons/trash.svg';
 import { Card } from '../../../components/Card';
 import OpacityAnimation from '../../../components/OpacityAnimation';
+import { useAppContext } from '../../../contexts/auth';
 import { CandidateType } from '../types';
 
 interface ListInterface {
@@ -22,6 +23,9 @@ export default function List({
     'applied': <small className='orange'>Em Aplicação</small>,
     'hired': <small className='green'>Contratado</small>,
   }
+
+  const { user } = useAppContext();
+  const isCustomer = user?.role === 'customer';
 
   return (
     <Container>
@@ -66,12 +70,14 @@ export default function List({
                   <Link to={`/candidates/${candidate.id}?active=Candidates`}>
                     <img src={edit} alt="" title={`Editar empresa ${candidate.name}`} />
                   </Link>
+                  {!isCustomer && (
                     <button
                       type="button"
                       onClick={() => onOpenDeleteModal(candidate)}
                     >
                       <img src={trash} alt="" title={`Remover empresa ${candidate.name}`} />
                     </button>
+                  )}
                 </div>
               </Card>
             </OpacityAnimation>

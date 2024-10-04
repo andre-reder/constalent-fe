@@ -33,9 +33,11 @@ export default function ChangeStatusModal({
       modalBody={(
         <>
           <FilterRadioButtonsContainer>
-            <FilterRadioButton onClick={() => setNewStatus('waiting')} selected={newStatus === 'waiting'}>
-              Aguardando
-            </FilterRadioButton>
+            {!isCustomer && (
+              <FilterRadioButton onClick={() => setNewStatus('waiting')} selected={newStatus === 'waiting'}>
+                Aguardando
+              </FilterRadioButton>
+            )}
             <FilterRadioButton onClick={() => setNewStatus('notContinued')} selected={newStatus === 'notContinued'}>
               Não Continuada
             </FilterRadioButton>
