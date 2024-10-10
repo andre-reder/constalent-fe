@@ -58,7 +58,7 @@ export default function ChangeStatusModal({
               Reprovada Empresa
             </FilterRadioButton>
             <FilterRadioButton onClick={() => setNewStatus('approvedByCompany')} selected={newStatus === 'approvedByCompany'}>
-              Aprovada Empresa
+              Aprovada Empresa (Contratado)
             </FilterRadioButton>
           </FilterRadioButtonsContainer>
         </>
