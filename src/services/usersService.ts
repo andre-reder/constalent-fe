@@ -49,7 +49,7 @@ class UsersService {
     reqBody,
     id,
   }: IUsersService) => {
-    return this.httpClient.put({
+    return this.httpClient.patch({
       path: `/users/${id}`,
       token,
       reqBody,

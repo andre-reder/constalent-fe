@@ -51,3 +51,21 @@ $ yarn dev
 http://localhost:5173
 
 
+## Acesso ao sistema online
+
+## 🌐 Acesso ao sistema completo
+Para facilitar a validação, o sistema está disponível no seguinte link:
+
+https://netlify.constalent.com
+
+Acesse o site se autenticando com as seguintes Credenciais:
+
+Visão Empresa R&S:
+Email: testers@tcc.com
+Senha: senha123
+
+Visão Cliente:
+Email: testecliente@tcc.com
+Senha: senha123
+
+Este link já está configurado e integrado com o back-end do projeto.
