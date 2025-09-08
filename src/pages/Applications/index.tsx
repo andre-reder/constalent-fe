@@ -160,7 +160,7 @@ export default function Applications() {
             icon="sad"
             label={(
               <>
-                Ocorreu um erro ao obter a lista de candidatos.
+                Ocorreu um erro ao obter a lista de aplicações.
                 <button type="button" onClick={handleTryAgain}>Tentar Novamente</button>
                 .
               </>
@@ -173,7 +173,7 @@ export default function Applications() {
             icon="emptyBox"
             label={(
               <>
-                Não há nenhum candidato cadastrado. Clique no botão <br /> <strong>Novo Candidato</strong> <br /> acima para cadastrar seu primeiro!
+                Não há nenhuma aplicação.
               </>
             )}
           />
